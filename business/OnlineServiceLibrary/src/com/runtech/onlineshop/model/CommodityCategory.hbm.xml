@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityCategory" table="commodity_category">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="commodityCategory" class="com.runtech.onlineshop.model.CommodityCategory" fetch="select">
+            <column name="PARENT_ID" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="1024" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="contents" inverse="true" lazy="true" table="content" fetch="select">
+            <key>
+                <column name="CATEGORY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Content" />
+        </set>
+        <set name="commodityCategories" inverse="true" lazy="true" table="commodity_category" fetch="select" order-by="priority">
+            <key>
+                <column name="PARENT_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityCategory" />
+        </set>
+        <set name="commodities" inverse="true" lazy="true" table="commodity" fetch="select">
+            <key>
+                <column name="CATEGORY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Commodity" />
+        </set>
+    </class>
+</hibernate-mapping>

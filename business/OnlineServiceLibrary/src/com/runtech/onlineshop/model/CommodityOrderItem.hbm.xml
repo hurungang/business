@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 15, 2011 11:50:37 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityOrderItem" table="commodity_order_item">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="commodityOrder" class="com.runtech.onlineshop.model.CommodityOrder" fetch="select">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="commodityPromotion" class="com.runtech.onlineshop.model.CommodityPromotion" fetch="select">
+            <column name="promotion_id" />
+        </many-to-one>
+        <many-to-one name="commodity" class="com.runtech.onlineshop.model.Commodity" fetch="select">
+            <column name="COMMODITY_ID" not-null="true" />
+        </many-to-one>
+        <property name="commodityNumber" type="java.lang.Integer">
+            <column name="COMMODITY_NUMBER" not-null="true" />
+        </property>
+        <property name="price" type="big_decimal">
+            <column name="PRICE" precision="10"/>
+        </property>
+        <property name="discount" type="big_decimal">
+            <column name="DISCOUNT" precision="3" />
+        </property>
+        <property name="realPrice" type="big_decimal">
+            <column name="REAL_PRICE" precision="10" />
+        </property>
+        <property name="point" type="java.lang.Integer">
+            <column name="POINT" />
+        </property>
+        <property name="rate" type="java.lang.Integer">
+            <column name="RATE" />
+        </property>
+        <property name="comment" type="string">
+            <column name="COMMENT" length="1000" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityPromotion" table="commodity_promotion" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="commodity" class="com.runtech.onlineshop.model.Commodity" fetch="select">
+            <column name="COMMODITY_ID" not-null="true" />
+        </many-to-one>
+        <property name="typeCode" type="string">
+            <column name="TYPE_CODE" length="50" not-null="true" />
+        </property>
+        <property name="typeTitle" type="string">
+            <column name="TYPE_TITLE" length="400" />
+        </property>
+        <property name="specialFlag" type="string">
+            <column name="SPECIAL_FLAG" length="50" />
+        </property>
+        <property name="title" type="string">
+            <column name="TITLE" length="400" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="65535" />
+        </property>
+        <property name="price" type="big_decimal">
+            <column name="PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="minOrderCount" type="java.lang.Integer">
+            <column name="MIN_ORDER_COUNT" />
+        </property>
+        <property name="currentOrderCount" type="java.lang.Integer">
+            <column name="CURRENT_ORDER_COUNT" />
+        </property>
+        <property name="maxOrderCount" type="java.lang.Integer">
+            <column name="MAX_ORDER_COUNT" />
+        </property>
+        <property name="maxIndividualOrderCount" type="java.lang.Integer">
+            <column name="MAX_INDIVIDUAL_ORDER_COUNT" />
+        </property>
+        <property name="userType" type="string">
+            <column name="USER_TYPE" length="50" />
+        </property>
+        <property name="userLevel" type="java.lang.Integer">
+            <column name="USER_LEVEL" />
+        </property>
+        <property name="additionalCondition" type="string">
+            <column name="ADDITIONAL_CONDITION" length="1000" />
+        </property>
+        <property name="startTime" type="timestamp">
+            <column name="START_TIME" length="19" not-null="true" />
+        </property>
+        <property name="endTime" type="timestamp">
+            <column name="END_TIME" length="19" not-null="true" />
+        </property>
+        <property name="regulationCode" type="string">
+            <column name="REGULATION_CODE" length="50" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="commodityOrderItems" table="commodity_order_item" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PROMOTION_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrderItem" />
+        </set>
+    </class>
+</hibernate-mapping>

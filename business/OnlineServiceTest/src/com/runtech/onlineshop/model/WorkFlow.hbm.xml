@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.WorkFlow" table="work_flow" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="adminRole" class="com.runtech.onlineshop.model.AdminRole" fetch="select">
+            <column name="REVIEWER_ROLE_ID" not-null="true" />
+        </many-to-one>
+        <property name="workFlowName" type="string">
+            <column name="WORK_FLOW_NAME" length="100" not-null="true" />
+        </property>
+        <property name="workFlowDetail" type="string">
+            <column name="WORK_FLOW_DETAIL" length="1000" />
+        </property>
+        <property name="documentType" type="string">
+            <column name="DOCUMENT_TYPE" length="100" not-null="true" />
+        </property>
+        <property name="documentStatus" type="string">
+            <column name="DOCUMENT_STATUS" length="50" not-null="true" />
+        </property>
+        <property name="reviewedStatus" type="string">
+            <column name="REVIEWED_STATUS" length="50" not-null="true" />
+        </property>
+        <property name="rejectedStatus" type="string">
+            <column name="REJECTED_STATUS" length="50" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityDetail" table="commodity_detail">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="commodityBase" class="com.runtech.onlineshop.model.CommodityBase" fetch="select">
+            <column name="COMMODITY_BASE_ID" />
+        </many-to-one>
+        <property name="detailCode" type="string">
+            <column name="DETAIL_CODE" length="100" />
+        </property>
+        <property name="introduction" type="string">
+            <column name="INTRODUCTION" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

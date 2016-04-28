@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.PageTemplate" table="page_template">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="100" />
+        </property>
+        <property name="language" type="string">
+            <column name="LANGUAGE" length="50" />
+        </property>
+        <property name="template" type="string">
+            <column name="TEMPLATE" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="siteModules" inverse="true" lazy="true" table="site_module" fetch="select">
+            <key>
+                <column name="PAGE_TEMPLATE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.SiteModule" />
+        </set>
+        <set name="pageTemplateComponents" inverse="true" lazy="true" table="page_template_component" fetch="select">
+            <key>
+                <column name="TEMPLATE_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.PageTemplateComponent" />
+        </set>
+    </class>
+</hibernate-mapping>

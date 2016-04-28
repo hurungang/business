@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 12, 2011 1:22:38 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Commodity" table="commodity">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select">
+            <column name="AREA_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="commodity" class="com.runtech.onlineshop.model.Commodity" fetch="select">
+            <column name="PARENT_COMMODITY_ID" />
+        </many-to-one>
+        <many-to-one name="commodityProvider" class="com.runtech.onlineshop.model.CommodityProvider" fetch="select">
+            <column name="PROVIDER_ID" />
+        </many-to-one>
+        <many-to-one name="commodityCategory" class="com.runtech.onlineshop.model.CommodityCategory" fetch="select">
+            <column name="CATEGORY_ID" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="shortName" type="string">
+            <column name="SHORT_NAME" length="50" not-null="true" />
+        </property>
+        <property name="summary" type="string">
+            <column name="SUMMARY" length="256" />
+        </property>
+        <property name="standard" type="string">
+            <column name="STANDARD" length="256" />
+        </property>
+        <property name="priceUnit" type="string">
+            <column name="PRICE_UNIT" length="256" />
+        </property>
+        <property name="priceQuantity" type="big_decimal">
+            <column name="PRICE_QUANTITY" precision="6" />
+        </property>
+        <property name="picturePath" type="string">
+            <column name="PICTURE_PATH" length="256" not-null="true" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" />
+        </property>
+        <property name="commendCode" type="string">
+            <column name="COMMEND_CODE" length="50" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="originalPrice" type="big_decimal">
+            <column name="ORIGINAL_PRICE" precision="10" />
+        </property>
+        <property name="price" type="big_decimal">
+            <column name="PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="price1" type="big_decimal">
+            <column name="PRICE_1" precision="10" />
+        </property>
+        <property name="price2" type="big_decimal">
+            <column name="PRICE_2" precision="10" />
+        </property>
+        <property name="price3" type="big_decimal">
+            <column name="PRICE_3" precision="10" />
+        </property>
+        <property name="price4" type="big_decimal">
+            <column name="PRICE_4" precision="10" />
+        </property>
+        <property name="price5" type="big_decimal">
+            <column name="PRICE_5" precision="10" />
+        </property>
+        <property name="point" type="java.lang.Integer">
+            <column name="POINT" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <property name="unit" type="string">
+            <column name="UNIT" length="50" not-null="true" />
+        </property>
+        <property name="quantity" type="big_decimal">
+            <column name="QUANTITY" precision="10" not-null="true" />
+        </property>
+        <property name="minimumBuy" type="java.lang.Integer">
+            <column name="MINIMUM_BUY" not-null="true" />
+        </property>
+        <set name="commodityOrderItems" inverse="true" lazy="true" table="commodity_order_item" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrderItem" />
+        </set>
+        <set name="labelCommodities" inverse="true" lazy="true" table="label_commodity" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.LabelCommodity" />
+        </set>
+        <set name="commodities" inverse="true" lazy="true" table="commodity" fetch="select">
+            <key>
+                <column name="PARENT_COMMODITY_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Commodity" />
+        </set>
+        <set name="commodityPromotions" inverse="true" lazy="true" table="commodity_promotion" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityPromotion" />
+        </set>
+        <set name="commodityPictures" inverse="true" lazy="true" table="commodity_picture" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityPicture" />
+        </set>
+        <set name="favoriteCommodities" inverse="true" lazy="true" table="favorite_commodity" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.FavoriteCommodity" />
+        </set>
+        <set name="commodityComments" inverse="true" lazy="true" table="commodity_comment" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityComment" />
+        </set>
+    </class>
+</hibernate-mapping>

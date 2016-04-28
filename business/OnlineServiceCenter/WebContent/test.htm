@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用CSS构建iframe效果 - Css Iframe - RexSong.com</title>
+<link style="text/css" href="css/datepicker.css" rel="stylesheet" />
+<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="js/prototype-1.6.0.2.js"></script>
+<script type="text/javascript" src="js/prototype-base-extensions.js"></script>
+<script type="text/javascript" src="js/prototype-date-extensions.js"></script>
+<script type="text/javascript" src="js/datepicker.js"></script>
+
+</head>
+<body>
+<form>
+<textarea rows="20" cols="60" class="ckeditor" name="content" id="content"></textarea>
+<input type="text" name="date" id="date" class="datepicker"/>
+<script>
+//var picker = new Control.DatePicker("date", {icon: '/images/calendar.png'});
+
+   function createPickers() {
+      $(document.body).select('input.datepicker').each(
+         function(e) {
+            new Control.DatePicker(e, { 'icon': 'images/calendar.png','locale':'zh_cn' });
+         }
+      );
+   }
+   Event.observe(window, 'load', createPickers);
+
+</script>
+</form>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.QuickComment" table="quick_comment" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="quickComment" class="com.runtech.onlineshop.model.QuickComment" fetch="select">
+            <column name="REFERENCE_ID" />
+        </many-to-one>
+        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="REPLY_ADMIN_ID" />
+        </many-to-one>
+        <property name="clientName" type="string">
+            <column name="CLIENT_NAME" length="200" />
+        </property>
+        <property name="commentContent" type="string">
+            <column name="COMMENT_CONTENT" />
+        </property>
+        <property name="commentTime" type="timestamp">
+            <column name="COMMENT_TIME" length="19" not-null="true" />
+        </property>
+        <property name="replyContent" type="string">
+            <column name="REPLY_CONTENT" />
+        </property>
+        <property name="replyTime" type="timestamp">
+            <column name="REPLY_TIME" length="19" not-null="true" />
+        </property>
+        <property name="commentLevel" type="java.lang.Integer">
+            <column name="COMMENT_LEVEL" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="quickComments" table="quick_comment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="REFERENCE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.QuickComment" />
+        </set>
+    </class>
+</hibernate-mapping>

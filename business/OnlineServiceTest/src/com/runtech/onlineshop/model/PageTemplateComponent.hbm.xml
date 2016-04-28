@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.PageTemplateComponent" table="page_template_component" catalog="bg_osc_db">
+        <composite-id name="id" class="com.runtech.onlineshop.model.PageTemplateComponentId">
+            <key-property name="templateId" type="java.lang.Integer">
+                <column name="TEMPLATE_ID" />
+            </key-property>
+            <key-property name="componentId" type="java.lang.Integer">
+                <column name="COMPONENT_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pageTemplate" class="com.runtech.onlineshop.model.PageTemplate" update="false" insert="false" fetch="select">
+            <column name="TEMPLATE_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pageComponent" class="com.runtech.onlineshop.model.PageComponent" update="false" insert="false" fetch="select">
+            <column name="COMPONENT_ID" not-null="true" />
+        </many-to-one>
+        <property name="referenceName" type="string">
+            <column name="REFERENCE_NAME" length="100" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

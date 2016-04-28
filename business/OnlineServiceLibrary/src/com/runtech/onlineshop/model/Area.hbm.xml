@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 18, 2011 10:02:45 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Area" table="area" >
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select">
+            <column name="PARENT_ID" />
+        </many-to-one>
+        <property name="code" type="string">
+            <column name="CODE" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="category" type="string">
+            <column name="CATEGORY" length="50" not-null="true" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="quickOrders" inverse="true" lazy="true" table="quick_order" fetch="select">
+            <key>
+                <column name="DELIVERY_AREA_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.QuickOrder" />
+        </set>
+        <set name="commodities" inverse="true" lazy="true" table="commodity" fetch="select">
+            <key>
+                <column name="AREA_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Commodity" />
+        </set>
+        <set name="users" inverse="true" lazy="true" table="user" fetch="select" order-by="id">
+            <key>
+                <column name="AREA_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="organizationUsers" inverse="true" lazy="true" table="user" fetch="select" where="user_type='organization'" order-by="id">
+            <key>
+                <column name="AREA_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="individualUsers" inverse="true" lazy="true" table="user" fetch="select" where="user_type='individual'" order-by="id">
+            <key>
+                <column name="AREA_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="deliveryContacts" inverse="true" lazy="true" table="delivery_contact" fetch="select">
+            <key>
+                <column name="AREA_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.DeliveryContact" />
+        </set>
+        <set name="areas" inverse="true" lazy="true" table="area" fetch="select" order-by="priority">
+            <key>
+                <column name="PARENT_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Area" />
+        </set>
+        <set name="commodityOrders" inverse="true" lazy="true" table="commodity_order" fetch="select">
+            <key>
+                <column name="DELIVERY_AREA_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrder" />
+        </set>
+    </class>
+</hibernate-mapping>

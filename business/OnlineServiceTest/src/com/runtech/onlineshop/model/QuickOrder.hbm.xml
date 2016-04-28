@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.QuickOrder" table="quick_order" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="user" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="USER_ID" />
+        </many-to-one>
+        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="CONFIRM_ADMIN_ID" />
+        </many-to-one>
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select">
+            <column name="DELIVERY_AREA_ID" />
+        </many-to-one>
+        <property name="clientName" type="string">
+            <column name="CLIENT_NAME" length="200" />
+        </property>
+        <property name="contact" type="string">
+            <column name="CONTACT" length="100" />
+        </property>
+        <property name="contactPhone" type="string">
+            <column name="CONTACT_PHONE" length="50" />
+        </property>
+        <property name="commodityMemo" type="string">
+            <column name="COMMODITY_MEMO" length="1000" />
+        </property>
+        <property name="orderMemo" type="string">
+            <column name="ORDER_MEMO" length="1000" />
+        </property>
+        <property name="dealTime" type="timestamp">
+            <column name="DEAL_TIME" length="19" not-null="true" />
+        </property>
+        <property name="orderType" type="string">
+            <column name="ORDER_TYPE" length="50" />
+        </property>
+        <property name="deliveryAddress" type="string">
+            <column name="DELIVERY_ADDRESS" length="500" />
+        </property>
+        <property name="planDeliveryTime" type="timestamp">
+            <column name="PLAN_DELIVERY_TIME" length="19" not-null="true" />
+        </property>
+        <property name="commodityConfirmComment" type="string">
+            <column name="COMMODITY_CONFIRM_COMMENT" length="1000" />
+        </property>
+        <property name="confirmDate" type="timestamp">
+            <column name="CONFIRM_DATE" length="19" not-null="true" />
+        </property>
+        <property name="confirmPrice" type="big_decimal">
+            <column name="CONFIRM_PRICE" precision="10" />
+        </property>
+        <property name="orderComment" type="string">
+            <column name="ORDER_COMMENT" length="1000" />
+        </property>
+        <property name="deliveryTime" type="timestamp">
+            <column name="DELIVERY_TIME" length="19" not-null="true" />
+        </property>
+        <property name="deliveryman" type="string">
+            <column name="DELIVERYMAN" length="100" />
+        </property>
+        <property name="deliveryStatus" type="string">
+            <column name="DELIVERY_STATUS" length="50" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="comment" type="string">
+            <column name="COMMENT" length="1000" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

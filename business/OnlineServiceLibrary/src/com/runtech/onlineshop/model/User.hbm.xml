@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 9, 2013 11:58:27 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.User" table="user" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select">
+            <column name="AREA_ID" />
+        </many-to-one>
+        <many-to-one name="recommendUser" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="RECOMMEND_USER_ID" />
+        </many-to-one>
+        <many-to-one name="parentUser" class="com.runtech.onlineshop.model.User" fetch="join" lazy="false">
+            <column name="PARENT_USER_ID" />
+        </many-to-one>
+        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="SERVICE_ADMIN" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="256" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="FULL_NAME" length="256" />
+        </property>
+        <property name="userType" type="string">
+            <column name="USER_TYPE" length="50" />
+        </property>
+        <property name="subUserType" type="string">
+            <column name="SUB_USER_TYPE" length="50" />
+        </property>
+        <property name="importance" type="java.lang.Integer">
+            <column name="IMPORTANCE" />
+        </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="AGE" />
+        </property>
+        <property name="sex" type="string">
+            <column name="SEX" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="MOBILE" length="50" unique="true" />
+        </property>
+        <property name="contact" type="string">
+            <column name="CONTACT" length="100" />
+        </property>
+        <property name="contactPosition" type="string">
+            <column name="CONTACT_POSITION" length="100" />
+        </property>
+        <property name="contactQq" type="string">
+            <column name="CONTACT_QQ" length="100" />
+        </property>
+        <property name="contactOther" type="string">
+            <column name="CONTACT_OTHER" length="1000" />
+        </property>
+        <property name="website" type="string">
+            <column name="WEBSITE" length="200" />
+        </property>
+        <property name="fax" type="string">
+            <column name="FAX" length="50" />
+        </property>
+        <property name="lastMaintainTime" type="timestamp">
+            <column name="LAST_MAINTAIN_TIME" length="19" not-null="true" />
+        </property>
+        <property name="sinaAuthorization" type="string">
+            <column name="SINA_AUTHORIZATION" />
+        </property>
+        <property name="qqAuthorization" type="string">
+            <column name="QQ_AUTHORIZATION" />
+        </property>
+        <property name="credentialType" type="string">
+            <column name="CREDENTIAL_TYPE" length="50" />
+        </property>
+        <property name="credentialNumber" type="string">
+            <column name="CREDENTIAL_NUMBER" length="100" />
+        </property>
+        <property name="point" type="big_decimal">
+            <column name="POINT" precision="10" />
+        </property>
+        <property name="empiricValue" type="big_decimal">
+            <column name="EMPIRIC_VALUE" precision="10" />
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="LEVEL" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="500" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="picturePath" type="string">
+            <column name="PICTURE_PATH" length="256" />
+        </property>
+        <property name="registerTime" type="timestamp">
+            <column name="REGISTER_TIME" length="19" not-null="true" />
+        </property>
+        <many-to-one name="updater" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="UPDATER" />
+        </many-to-one>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" />
+        </property>
+        <set name="userLoginLogs" table="user_login_log" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.UserLoginLog" />
+        </set>
+        <set name="quickOrders" inverse="true" lazy="true" table="quick_order" fetch="select" order-by="deal_time desc">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.QuickOrder" />
+        </set>
+        <one-to-one name="userDetail" class="com.runtech.onlineshop.model.UserDetail"></one-to-one>
+        <set name="favoriteCommodities" inverse="true" lazy="true" table="favorite_commodity" fetch="select">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.FavoriteCommodity" />
+        </set>
+        <set name="userContracts" inverse="true" lazy="true" table="user_contract" fetch="select" order-by="sign_time desc">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.UserContract" />
+        </set>
+        <set name="favoriteContents" inverse="true" lazy="true" table="favorite_content" fetch="select">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.FavoriteContent" />
+        </set>
+        <set name="linkUsers" inverse="true" lazy="true" table="user" fetch="select">
+            <key>
+                <column name="RECOMMEND_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="subUsers" inverse="true" lazy="true" table="user" fetch="select">
+            <key>
+                <column name="PARENT_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="subOrganizationUsers" inverse="true" lazy="true" table="user" fetch="select" where="user_type='organization'">
+            <key>
+                <column name="PARENT_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="subIndividualUsers" inverse="true" lazy="true" table="user" fetch="select" where="user_type='individual'">
+            <key>
+                <column name="PARENT_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="pointLogs" inverse="true" lazy="true" table="point_log" fetch="select">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.PointLog" />
+        </set>
+        <set name="userMaintainLogs" inverse="true" lazy="true" table="user_maintain_log" fetch="select">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.UserMaintainLog" />
+        </set>
+        <set name="commodityOrders" inverse="true" lazy="true" table="commodity_order" fetch="select">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrder" />
+        </set>
+        <set name="deliveryCommodityOrders" inverse="true" lazy="true" table="commodity_order" fetch="select">
+            <key>
+                <column name="DELIVERY_TO_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrder" />
+        </set>
+        <set name="commodityComments" inverse="true" lazy="true" table="commodity_comment" fetch="select">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityComment" />
+        </set>
+        <set name="deliveryContacts" inverse="true" lazy="true" table="delivery_contact" fetch="select">
+            <key>
+                <column name="USER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.DeliveryContact" />
+        </set>
+    </class>
+</hibernate-mapping>

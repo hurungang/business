@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityOrder" table="commodity_order">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.runtech.onlineshop.model.User" fetch="join" lazy="false">
+            <column name="USER_ID" />
+        </many-to-one>
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select">
+            <column name="DELIVERY_AREA_ID" />
+        </many-to-one>
+        <many-to-one name="deliveryToUser" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="DELIVERY_TO_USER_ID" />
+        </many-to-one>
+        <property name="dealTime" type="timestamp">
+            <column name="DEAL_TIME" length="19" not-null="true" />
+        </property>
+        <property name="payType" type="string">
+            <column name="PAY_TYPE" length="50" />
+        </property>
+        <property name="quickRequest" type="string">
+            <column name="QUICK_REQUEST" />
+        </property>
+        <property name="quickPropose" type="string">
+            <column name="QUICK_PROPOSE"/>
+        </property>
+        <property name="freight" type="big_decimal">
+            <column name="FREIGHT" precision="6" />
+        </property>
+        <property name="deliveryAddress" type="string">
+            <column name="DELIVERY_ADDRESS" length="500" />
+        </property>
+        <property name="deliveryTime" type="timestamp">
+            <column name="DELIVERY_TIME" length="19" />
+        </property>
+        <property name="deliveryman" type="string">
+            <column name="DELIVERYMAN" length="100" />
+        </property>
+        <property name="postcode" type="string">
+            <column name="POSTCODE" length="50" />
+        </property>
+        <property name="contact" type="string">
+            <column name="CONTACT" length="100" />
+        </property>
+        <property name="contactPhone" type="string">
+            <column name="CONTACT_PHONE" length="50" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <property name="orderType" type="string">
+            <column name="ORDER_TYPE" length="50" />
+        </property>
+        <property name="planDeliveryTime" type="timestamp">
+            <column name="PLAN_DELIVERY_TIME" length="19" />
+        </property>
+        <property name="memo" type="string">
+            <column name="MEMO" length="1000" />
+        </property>
+        <property name="comment" type="string">
+            <column name="COMMENT" length="1000" />
+        </property>
+        <set name="pointLogs" inverse="true" lazy="true" table="point_log" fetch="select">
+            <key>
+                <column name="ORDER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.PointLog" />
+        </set>
+        <set name="commodityPayments" inverse="true" lazy="true" table="commodity_payment" fetch="select">
+            <key>
+                <column name="ORDER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityPayment" />
+        </set>
+        <set name="commodityOrderItems" inverse="true" lazy="true" table="commodity_order_item" fetch="select">
+            <key>
+                <column name="ORDER_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrderItem" />
+        </set>
+    </class>
+</hibernate-mapping>

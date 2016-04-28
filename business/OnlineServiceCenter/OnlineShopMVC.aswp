@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webProject xmlns="http://www.alveole-studio.com/mvcwebproject/defaultns" name="OnlineShopMVC" version="0.7.0">
+<description/>
+<package id="root" label="root" relayout="false">
+<package id="54b805fd-7057-48cf-9ab4-5639c5f4bb54" label="commodity" relayout="false">
+<uiPreferences/>
+<package-exts>
+<plugin id="com.alveole.studio.web.managers.struts2editor.Struts2Panel"/>
+</package-exts>
+</package>
+<package id="4e13a39e-a50b-45a6-8c1f-354112656dbb" label="system" relayout="false">
+<uiPreferences/>
+<package-exts>
+<plugin id="com.alveole.studio.web.managers.struts2editor.Struts2Panel"/>
+</package-exts>
+</package>
+<view id="2c3a99c2-a4a6-4d24-9328-0fdb07ccc053" label="login" mgrId="com.alveole.studio.web.managers.JspGenericViewManager">
+<specific xmlns:jsp="http://www.alveole-studio.com/mvcwebproject/jspmanager" jsp:jsp.path="/login.jsp"/>
+</view>
+<action id="224fae86-f125-47d5-acfe-d7618bab47b2" label="login" mgrId="com.alveole.studio.web.managers.Struts2ActionActionManager">
+<uiPreferences/>
+<specific xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config" s:class="com.runtech.onlineshop.action.AuthenticationAction" s:method="login" s:path="login">
+<s:interceptors/>
+<s:exception-mappings/>
+</specific>
+</action>
+<uiPreferences>
+<pref name="2c3a99c2-a4a6-4d24-9328-0fdb07ccc053.y">159.4355239868164</pref>
+<pref name="2c3a99c2-a4a6-4d24-9328-0fdb07ccc053.x">303.2632522583008</pref>
+<pref name="54b805fd-7057-48cf-9ab4-5639c5f4bb54.y">300.0</pref>
+<pref name="224fae86-f125-47d5-acfe-d7618bab47b2.y">215.9321403503418</pref>
+<pref name="4e13a39e-a50b-45a6-8c1f-354112656dbb.y">361.65679931640625</pref>
+<pref name="54b805fd-7057-48cf-9ab4-5639c5f4bb54.x">300.0</pref>
+<pref name="224fae86-f125-47d5-acfe-d7618bab47b2.x">306.6157531738281</pref>
+<pref name="4e13a39e-a50b-45a6-8c1f-354112656dbb.x">300.500732421875</pref>
+</uiPreferences>
+<package-exts/>
+</package>
+<links/>
+<projectproperties>
+<plugin xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config" id="com.alveole.studio.web.managers.struts2editor.Struts2Panel">
+<s:package default="true" name="alveole" namespace="/" parent="alveole-defaults" xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config">
+<s:interceptors xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config"/>
+<s:global-results xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config"/>
+<s:global-exception-mappings xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config"/>
+<s:result-types xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config"/>
+</s:package>
+<s:beans xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config"/>
+<s:constants xmlns:s="http://www.alveole-studio.com/mvcwebproject/struts2config"/>
+</plugin>
+<plugin id="com.alveole.studio.properties.Struts2PropertiesEditor"/>
+</projectproperties>
+<features>
+<feature name="com.alveole.studio.struts2"/>
+</features>
+</webProject>

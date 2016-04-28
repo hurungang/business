@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Bill" table="bill" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="Id" />
+            <generator class="assigned" />
+        </id>
+        <property name="title" type="string">
+            <column name="title" not-null="true" />
+        </property>
+        <property name="billTime" type="timestamp">
+            <column name="bill_time" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" />
+        </property>
+        <property name="billStartTime" type="timestamp">
+            <column name="bill_start_time" length="19" />
+        </property>
+        <property name="billEndTime" type="timestamp">
+            <column name="bill_end_time" length="19" />
+        </property>
+        <property name="invoiceNumber" type="string">
+            <column name="invoice_number" />
+        </property>
+        <property name="comment" type="string">
+            <column name="comment" length="65535" />
+        </property>
+        <property name="totalAmount" type="big_decimal">
+            <column name="total_amount" precision="10" />
+        </property>
+        <property name="reduceAmount" type="big_decimal">
+            <column name="reduce_amount" precision="10" />
+        </property>
+        <property name="paidAmount" type="big_decimal">
+            <column name="paid_amount" precision="10" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" />
+        </property>
+        <set name="billCommodityOrders" table="bill_commodity_order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="bill_id" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.BillCommodityOrder" />
+        </set>
+    </class>
+</hibernate-mapping>

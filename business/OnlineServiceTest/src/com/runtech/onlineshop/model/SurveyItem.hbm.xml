@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.SurveyItem" table="survey_item" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="survey" class="com.runtech.onlineshop.model.Survey" fetch="select">
+            <column name="SURVEY_ID" not-null="true" />
+        </many-to-one>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="65535" not-null="true" />
+        </property>
+        <property name="link" type="string">
+            <column name="LINK" length="256" />
+        </property>
+        <property name="referType" type="string">
+            <column name="REFER_TYPE" length="50" />
+        </property>
+        <property name="referId" type="java.lang.Integer">
+            <column name="REFER_ID" />
+        </property>
+        <property name="count" type="java.lang.Integer">
+            <column name="COUNT" not-null="true" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

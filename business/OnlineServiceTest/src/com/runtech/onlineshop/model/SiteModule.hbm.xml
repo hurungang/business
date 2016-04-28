@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.SiteModule" table="site_module" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pageTemplate" class="com.runtech.onlineshop.model.PageTemplate" fetch="select">
+            <column name="PAGE_TEMPLATE_ID" />
+        </many-to-one>
+        <many-to-one name="siteModule" class="com.runtech.onlineshop.model.SiteModule" fetch="select">
+            <column name="PARENT_MODULE_ID" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" />
+        </property>
+        <property name="code" type="string">
+            <column name="CODE" length="20" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" length="50" />
+        </property>
+        <property name="url" type="string">
+            <column name="URL" length="256" />
+        </property>
+        <property name="queryString" type="string">
+            <column name="QUERY_STRING" length="256" />
+        </property>
+        <property name="title" type="string">
+            <column name="TITLE" length="256" />
+        </property>
+        <property name="subtitle" type="string">
+            <column name="SUBTITLE" length="1000" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="contents" table="content" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SITE_MODULE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Content" />
+        </set>
+        <set name="surveies" table="survey" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SITE_MODULE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Survey" />
+        </set>
+        <set name="siteModules" table="site_module" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PARENT_MODULE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.SiteModule" />
+        </set>
+    </class>
+</hibernate-mapping>

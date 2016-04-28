@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.ReferralLog" table="referral_log" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="userMobile" type="string">
+            <column name="USER_MOBILE" length="50" not-null="true" />
+        </property>
+        <property name="introducerMobile" type="string">
+            <column name="INTRODUCER_MOBILE" length="50" not-null="true" />
+        </property>
+        <property name="introducerName" type="string">
+            <column name="INTRODUCER_NAME" length="100" not-null="true" />
+        </property>
+        <property name="introduceTime" type="timestamp">
+            <column name="INTRODUCE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-7-23 13:12:47 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityBase" table="commodity_base" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="shortName" type="string">
+            <column name="SHORT_NAME" length="50" not-null="true" />
+        </property>
+        <property name="summary" type="string">
+            <column name="SUMMARY" length="256" />
+        </property>
+        <property name="picturePath" type="string">
+            <column name="PICTURE_PATH" length="256" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="commodityBasePictures" table="commodity_base_picture" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="COMMODITY_BASE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityBasePicture" />
+        </set>
+        <set name="commodityDetails" table="commodity_detail" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="COMMODITY_BASE_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityDetail" />
+        </set>
+    </class>
+</hibernate-mapping>

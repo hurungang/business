@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.UserDetail" table="user_detail">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <one-to-one name="user" class="com.runtech.onlineshop.model.User" constrained="true"></one-to-one>
+        <property name="introduction" type="string">
+            <column name="INTRODUCTION" />
+        </property>
+        <property name="question" type="string">
+            <column name="QUESTION" length="500" />
+        </property>
+        <property name="answer" type="string">
+            <column name="ANSWER" length="500" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

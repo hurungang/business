@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 22, 2013 8:33:06 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.UserLoginLog" table="user_login_log" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="USER_ID" not-null="true" />
+        </many-to-one>
+        <property name="loginMachine" type="string">
+            <column name="LOGIN_MACHINE" length="100" />
+        </property>
+        <property name="loginFrom" type="string">
+            <column name="LOGIN_FROM" length="100" />
+        </property>
+        <property name="loginResult" type="boolean">
+            <column name="LOGIN_RESULT" not-null="true" />
+        </property>
+        <property name="loginTime" type="timestamp">
+            <column name="LOGIN_TIME" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
