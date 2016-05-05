@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<pages>
+		<page name="$META$">
+			<uri>/WEB-INF/jsp/default/meta.jsp</uri>
+		</page>
+		<page name="$LEFT_NAVIGATION$">
+			<uri>/WEB-INF/jsp/default/leftNavigation.jsp</uri>
+		</page>
+		<page name="$HEADER$">
+			<uri>/WEB-INF/jsp/default/header.jsp</uri>
+		</page>
+		<page name="$BODY_TITLE$">
+			<uri>/WEB-INF/jsp/default/bodyTitle.jsp</uri>
+		</page>
+		<page name="$BODY$">
+			<uri>/WEB-INF/jsp/default/body.jsp</uri>
+		</page>
+		<page name="$FOOTER$">
+			<uri>/WEB-INF/jsp/default/footer.jsp</uri>
+		</page>
+		<page name="$SCRIPT$">
+			<uri>/WEB-INF/jsp/default/script.jsp</uri>
+		</page>
+		<page name="$AJAX_SCRIPT$">
+			<uri>/WEB-INF/jsp/default/ajax_script.jsp</uri>
+		</page>
+		<page name="$AJAX_BODY_TITLE$">
+			<uri>/WEB-INF/jsp/default/ajaxBodyTitle.jsp</uri>
+		</page>
+	</pages>
+</layout>
+	

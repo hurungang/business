@@ -3,6 +3,7 @@
 	<name>OnlineServiceLibrary</name>
 	<comment></comment>
 	<projects>
+		<project>RuntechLibrary</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

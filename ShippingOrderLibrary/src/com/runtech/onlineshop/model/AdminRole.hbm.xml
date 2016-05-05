@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-30 21:40:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.AdminRole" table="admin_role" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="adminRoleModules" table="admin_role_module" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ROLE_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.AdminRoleModule" />
+        </set>
+        <set name="admins" table="admin" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ROLE_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Admin" />
+        </set>
+    </class>
+</hibernate-mapping>

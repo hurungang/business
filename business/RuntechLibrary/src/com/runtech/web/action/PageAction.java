@@ -2,6 +2,7 @@ package com.runtech.web.action;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -227,7 +228,7 @@ public class PageAction extends StrutsAction implements ModelDriven<Object>,Sess
 			try {
 				this.modelForm = newPageModelInstance();
 			} catch (ModelException e) {
-				LOG.error(e);
+				LOG.error(e.getMessage());
 			}
 		}
 		return this.modelForm;
@@ -268,7 +269,7 @@ public class PageAction extends StrutsAction implements ModelDriven<Object>,Sess
 				count = modelHome.getCount(newPageModelInstance.getModel());
 			}
 		} catch (ModelException e) {
-			LOG.error(e);
+			LOG.error(e.getMessage());
 		}
 		return count;
 	}
@@ -430,5 +431,6 @@ public class PageAction extends StrutsAction implements ModelDriven<Object>,Sess
 		}
 	}
 	
+
 	
 }

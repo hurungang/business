@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!--
+		WARNING: This file was automatically generated from Eclipse Alveole
+		Studio Plugin. Do not edit it mannually: it will be erased
+		automatically !
+	-->
+	<constant name="runtech.result.login" value="login"/>
+	<constant name="runtech.result.success" value="success"/>
+	<constant name="runtech.result.failure" value="failure"/>
+	<constant name="runtech.result.error" value="error"/>
+	<constant name="runtech.result.default" value="default"/>
+	<constant name="runtech.result.cancel" value="cancel"/>
+	<constant name="runtech.result.unauthorized" value="unauthorized"/>
+	<constant name="runtech.result.custom" value="custom"/>
+	<constant name="runtech.page.size" value="10"/>
+	<constant name="runtech.context.upload" value="/upload"/>
+	<constant name="runtech.path.uploadImage" value="/images"/>
+	<constant name="runtech.path.uploadFile" value="/files"/>
+	<bean class="com.runtech.sms.SMSSenderImpl" name="runtech.sms.sender" type="com.runtech.util.SMSSender"></bean>
+	
+	<package extends="runtech-defaults" name="root" namespace="/">
+	
+		<!-- page for login -->
+		<action name="index">
+			<result>adminLogin.jsp</result>
+		</action>
+		
+		<!-- page for login -->
+		<action name="login">   
+			<interceptor-ref name="store">
+     			<param name="operationMode">RETRIEVE</param>
+   			</interceptor-ref>
+			<result>adminLogin.jsp</result>
+		</action>
+		<!-- action for admin login -->
+		<action class="com.runtech.onlineshop.action.AuthenticationAction"
+			method="adminLogin" name="adminLoginAction">   
+			<interceptor-ref name="defaultStack" /> 
+			<interceptor-ref name="store">
+     			<param name="operationMode">STORE</param>
+   			</interceptor-ref>
+			<result name="default" type="redirectAction">
+				<param name="actionName">index</param>
+				<param name="namespace">/protect</param>
+			</result>
+			<result name="success" type="redirect">
+				<param name="location">${requestURL}</param>
+			</result>
+			<result name="failure" type="redirectAction">
+				<param name="actionName">login</param>
+			</result>
+		</action>
+		<!-- action for logout -->
+		<action class="com.runtech.onlineshop.action.AuthenticationAction"
+			method="logout" name="logout">
+			<result name="success" type="redirectAction">
+				<param name="actionName">login</param>
+			</result>
+			<result name="default" type="redirectAction">
+				<param name="actionName">login</param>
+			</result>
+		</action>
+		
+		<!-- page for index -->
+		<action  name="upload" class="com.runtech.web.action.UploadAction">
+                <interceptor-ref name="servletConfig"/>
+				<interceptor-ref name="fileUpload">   
+					<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/bmp,image/gif,image/x-png,application/msword,application/excel,application/vnd.ms-excel,application/pdf,application/octet-stream,text/plain</param>
+					<param name="maximumSize">1024000</param>   
+	            </interceptor-ref>  
+	            <interceptor-ref name="runtechBasicStack"/> 
+			<result type="dispatcher" name="success">
+				<param name="location">/protect/upload.jsp</param>
+			</result>
+		</action>
+		
+
+	</package>
+	
+	<package extends="json-default" name="json" namespace="/json">			
+		<!-- page for json -->
+		<action name="*/*" class="com.runtech.web.action.JsonAction" method="json">
+
+			<param name="objectType">{1}</param>
+			<param name="objectId">{2}</param>
+			<result name="success" type="json">  
+                <param name="root">result</param>  
+            </result>
+		</action>
+	</package>
+	
+	<package extends="runtech-defaults" name="protect" namespace="/protect">
+		<interceptors>
+			<!-- interceptor for authentication -->
+			<interceptor-stack name="basicAuthenticationStack">
+                <interceptor-ref name="servletConfig"/>
+				<interceptor-ref name="authenticationInterceptor"/> 
+				<interceptor-ref name="fileUpload">   
+					<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/bmp,image/gif,image/x-png,application/msword,application/excel,application/vnd.ms-excel,application/pdf,application/octet-stream,text/plain</param>
+					<param name="maximumSize">1024000</param>   
+	            </interceptor-ref>  
+	            <interceptor-ref name="runtechBasicStack"/> 
+			</interceptor-stack>
+			<interceptor name="authenticationInterceptor"
+				class="com.runtech.onlineshop.action.AuthenticationAction" />
+		</interceptors>
+		
+		<default-interceptor-ref name="basicAuthenticationStack"></default-interceptor-ref>
+		
+		<global-results>
+			<!-- global result for login -->
+			<result name="login" type="redirectAction">
+				<param name="actionName">login</param>
+				<param name="namespace">/</param>
+			</result>
+		</global-results>
+	
+		<!-- page for index -->
+		<action name="index">
+			<result type="redirectAction">
+				<param name="actionName">home/dashboard</param>
+			</result>
+		</action>
+		
+		<action name="ajax/*" class="com.runtech.web.action.PageAction">
+		
+		    <interceptor-ref name="scope">
+		        <param name="session">pageModel,pagePath</param>
+		        <param name="autoCreateSession">true</param>
+		    </interceptor-ref>
+		    <interceptor-ref name="basicAuthenticationStack"></interceptor-ref>
+			<param name="pageCode">{1}</param>
+			<result type="redirectAction" name="success">
+				<param name="actionName">ajax/${pageCode}</param>
+				<param name="namespace">/protect</param>
+				<param name="actionType">default</param>
+			</result>
+			<result type="dispatcher" name="default">
+				<param name="location">/protect/ajax.jsp?$body=${pagePath}</param>
+			</result>
+			<result type="dispatcher" name="error">
+				<param name="location">/protect/ajax.jsp?$body=/WEB-INF/jsp/default/error.jsp</param>
+			</result>
+			<result type="dispatcher" name="failure">
+				<param name="location">/protect/ajax.jsp?$body=${pagePath}</param>
+			</result>
+			<result type="redirectAction" name="cancel">
+				<param name="actionName">ajax/${pageCode}</param>
+				<param name="namespace">/protect</param>
+				<param name="actionType">default</param>
+			</result>
+			<result type="dispatcher" name="unauthorized">
+				<param name="location">/protect/ajax.jsp?$body=/WEB-INF/jsp/default/unauthorized.jsp</param>
+			</result>
+			<result type="redirect" name="custom">${nextLocation}</result>
+		</action>
+		<!-- page for edit -->
+		<action name="*/*" class="com.runtech.web.action.PageAction">
+		
+		    <interceptor-ref name="scope">
+		        <param name="session">pageModel,pagePath</param>
+		        <param name="autoCreateSession">true</param>
+		    </interceptor-ref>
+		    <interceptor-ref name="basicAuthenticationStack"></interceptor-ref>
+			<param name="catalogCode">{1}</param>	
+			<param name="pageCode">{2}</param>
+			<result type="redirectAction" name="success">
+				<param name="actionName">${catalogCode}/${pageCode}</param>
+				<param name="namespace">/protect</param>
+				<param name="actionType">default</param>
+			</result>
+			<result type="dispatcher" name="default">
+				<param name="location">/protect/main.jsp?$body=${pagePath}</param>
+			</result>
+			<result type="dispatcher" name="error">
+				<param name="location">/protect/main.jsp?$body=/WEB-INF/jsp/default/error.jsp</param>
+			</result>
+			<result type="dispatcher" name="failure">
+				<param name="location">/protect/main.jsp?$body=${pagePath}</param>
+			</result>
+			<result type="redirectAction" name="cancel">
+				<param name="actionName">${catalogCode}/${pageCode}</param>
+				<param name="namespace">/protect</param>
+				<param name="actionType">default</param>
+			</result>
+			<result type="dispatcher" name="unauthorized">
+				<param name="location">/protect/main.jsp?$body=/WEB-INF/jsp/default/unauthorized.jsp</param>
+			</result>
+			<result type="redirect" name="custom">${nextLocation}</result>
+		</action>
+		
+	</package>
+</struts>

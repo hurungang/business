@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-4 9:52:58 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Admin" table="admin" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="adminRole" class="com.runtech.onlineshop.model.AdminRole" fetch="select">
+            <column name="ROLE_ID" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="256" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="FULL_NAME" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="MOBILE" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="1024" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="usersForUpdater" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UPDATER" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="commodityProviders" table="commodity_provider" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="UPDATER" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityProvider" />
+        </set>
+        <set name="usersForServiceAdmin" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="SERVICE_ADMIN" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="adminLoginLogs" table="admin_login_log" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ADMIN_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.AdminLoginLog" />
+        </set>
+    </class>
+</hibernate-mapping>

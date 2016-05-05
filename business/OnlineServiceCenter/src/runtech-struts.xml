@@ -47,14 +47,14 @@
 			<interceptor-ref name="store">
      			<param name="operationMode">STORE</param>
    			</interceptor-ref>
-			<result name="default" type="redirect-action">
+			<result name="default" type="redirectAction">
 				<param name="actionName">index</param>
 				<param name="namespace">/protect</param>
 			</result>
 			<result name="success" type="redirect">
 				<param name="location">${requestURL}</param>
 			</result>
-			<result name="failure" type="redirect-action">
+			<result name="failure" type="redirectAction">
 				<param name="actionName">login</param>
 			</result>
 		</action>
@@ -65,24 +65,24 @@
 			<interceptor-ref name="store">
      			<param name="operationMode">STORE</param>
    			</interceptor-ref>
-			<result name="default" type="redirect-action">
+			<result name="default" type="redirectAction">
 				<param name="actionName">index</param>
 				<param name="namespace">/protect</param>
 			</result>
 			<result name="success" type="redirect">
 				<param name="location">${requestURL}</param>
 			</result>
-			<result name="failure" type="redirect-action">
+			<result name="failure" type="redirectAction">
 				<param name="actionName">adminLogin</param>
 			</result>
 		</action>
 		<!-- action for logout -->
 		<action class="com.runtech.onlineshop.action.AuthenticationAction"
 			method="logout" name="logout">
-			<result name="default" type="redirect-action">
+			<result name="default" type="redirectAction">
 				<param name="actionName">login</param>
 			</result>
-			<result name="success" type="redirect-action">
+			<result name="success" type="redirectAction">
 				<param name="actionName">adminLogin</param>
 			</result>
 		</action>
@@ -98,6 +98,19 @@
 			<result type="dispatcher" name="success">
 				<param name="location">/protect/upload.jsp</param>
 			</result>
+		</action>
+		
+
+	</package>
+	
+	<package extends="json-default" name="json" namespace="/json">			
+		<!-- page for jason -->
+		<action name="*/*" class="com.runtech.web.action.JsonAction" method="json">
+			<param name="objectType">{1}</param>
+			<param name="objectId">{2}</param>
+			<result name="success" type="json">  
+                <param name="root">result</param>  
+            </result> 
 		</action>
 	</package>
 	<package extends="runtech-defaults" name="protect" namespace="/protect">
@@ -120,7 +133,7 @@
 		
 		<global-results>
 			<!-- global result for login -->
-			<result name="login" type="redirect-action">
+			<result name="login" type="redirectAction">
 				<param name="actionName">login</param>
 				<param name="namespace">/</param>
 			</result>
@@ -128,7 +141,7 @@
 	
 		<!-- page for index -->
 		<action name="index">
-			<result type="redirect-action">
+			<result type="redirectAction">
 				<param name="actionName">home/dashboard</param>
 			</result>
 		</action>
@@ -141,7 +154,7 @@
 		    </interceptor-ref>
 		    <interceptor-ref name="basicAuthenticationStack"></interceptor-ref>
 			<param name="pageCode">{1}</param>
-			<result type="redirect-action" name="success">
+			<result type="redirectAction" name="success">
 				<param name="actionName">ajax/${pageCode}</param>
 				<param name="namespace">/protect</param>
 				<param name="actionType">default</param>
@@ -155,7 +168,7 @@
 			<result type="dispatcher" name="failure">
 				<param name="location">/protect/ajax.jsp?$body=${pagePath}</param>
 			</result>
-			<result type="redirect-action" name="cancel">
+			<result type="redirectAction" name="cancel">
 				<param name="actionName">ajax/${pageCode}</param>
 				<param name="namespace">/protect</param>
 				<param name="actionType">default</param>
@@ -175,7 +188,7 @@
 		    <interceptor-ref name="basicAuthenticationStack"></interceptor-ref>
 			<param name="catalogCode">{1}</param>	
 			<param name="pageCode">{2}</param>
-			<result type="redirect-action" name="success">
+			<result type="redirectAction" name="success">
 				<param name="actionName">${catalogCode}/${pageCode}</param>
 				<param name="namespace">/protect</param>
 				<param name="actionType">default</param>
@@ -189,7 +202,7 @@
 			<result type="dispatcher" name="failure">
 				<param name="location">/protect/main.jsp?$body=${pagePath}</param>
 			</result>
-			<result type="redirect-action" name="cancel">
+			<result type="redirectAction" name="cancel">
 				<param name="actionName">${catalogCode}/${pageCode}</param>
 				<param name="namespace">/protect</param>
 				<param name="actionType">default</param>

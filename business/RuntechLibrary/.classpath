@@ -1,72 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
-	<classpathentry exported="true" kind="lib" path="activation.jar"/>
-	<classpathentry exported="true" kind="lib" path="alveole-struts2.jar"/>
-	<classpathentry exported="true" kind="lib" path="alveole-tools.jar"/>
-	<classpathentry exported="true" kind="lib" path="antlr-2.7.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="c3p0-0.9.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-beanutils-1.6-src.zip"/>
-	<classpathentry exported="true" kind="lib" path="commons-beanutils-1.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-chain-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-codec.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-collections-3.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-digester.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-fileupload-1.2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-httpclient-3.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-io-1.3.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-lang-2.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-logging-1.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-logging-api-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-validator-1.3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="display.jar"/>
-	<classpathentry exported="true" kind="lib" path="dom4j-1.6.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="fckeditor-java-core-2.5-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="fckeditor-java-core-2.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="freemarker-2.3.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="hibernate3.jar"/>
-	<classpathentry exported="true" kind="lib" path="imageinfo-1.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="javamail.jar"/>
-	<classpathentry exported="true" kind="lib" path="javassist-3.9.0.GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="jta-1.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="log4j-1.2.9.jar"/>
-	<classpathentry exported="true" kind="lib" path="mysql-connector-java-5.0.4-bin.jar"/>
-	<classpathentry exported="true" kind="lib" path="ognl-2.6.11.jar"/>
-	<classpathentry exported="true" kind="lib" path="oro-2.0.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="slf4j-api-1.5.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="slf4j-simple-1.5.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="struts2-core-2.0.11.jar"/>
-	<classpathentry exported="true" kind="lib" path="tabletags.jar"/>
-	<classpathentry exported="true" kind="lib" path="tiles-api-2.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="tiles-core-2.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="tiles-jsp-2.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="velocity-1.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="xalan-2.7.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="xwork-2.0.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/activation.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.utility"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_43">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="lib/alveole-struts2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/alveole-tools.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/antlr-2.7.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/axis.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/c3p0-0.9.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/classes12.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-chain-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-codec.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-collections-3.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-digester.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-httpclient-3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-io-1.3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-lang-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-logging-1.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-logging-api-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-validator-1.3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-validator.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/display.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fckeditor-java-core-2.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/freemarker-2.3.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/hibernate3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/imageinfo-1.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javamail.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/javassist-3.9.0.GA.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jdom.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/JimiProClasses.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jta-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.16.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.0.4-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ognl-2.6.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/oro-2.0.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/pinyin4j-2.5.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/quartz-2.2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/quartz-jobs-2.2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/servlet-api.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.6.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-log4j12-1.6.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/struts.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/xwork-2.0.4-sources.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/uploadify.zip"/>
-	<classpathentry exported="true" kind="lib" path="jstl-1_0-fr-api.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/tabletags.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/tiles-api-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/tiles-core-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/tiles-jsp-2.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/velocity-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xalan-2.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jstl-1_0-fr-api.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/jmagick.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/QRCode.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/Qrcodeen.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/gson-2.3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/struts2-json-plugin-2.1.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/struts2-core-2.1.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xwork-core-2.1.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/activation.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/displaytag-1.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-1.9.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

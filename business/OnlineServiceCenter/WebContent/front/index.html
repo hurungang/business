@@ -1,10 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="orderApp">
 <head>
 <meta charset="UTF-8">
 <title>Customer Order Detail - 客户订单详情</title>
+<script type="text/javascript"  src="js/angular.min.js"></script>
+<script type="text/javascript"  src="js/angular-animate.min.js"></script>
+<script type="text/javascript"  src="js/angular-touch.min.js"></script>
+<script type="text/javascript"  src="js/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="js/angular-route.min.js"></script>
+<script type="text/javascript" src="js/mobile-angular-ui.min.js"></script>
+<script type="text/javascript"  src="js/app.js"></script>
+<link href="css/order.css" rel="stylesheet" type="text/css"/>
+<link href="css/ui-bootstrap-csp.css" rel="stylesheet" type="text/css"/>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css" />
+<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css" />
+<link rel="stylesheet" href="mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css" />
 </head>
-<body>
 
+<body ng-controller="Order as order">
+  <div style="height: 305px">
+    <uib-carousel active="0" interval="5000" no-wrap="false">
+      <uib-slide ng-repeat="slide in order.orderItems track by slide.id" index="slide.id">
+        <img ng-src="{{slide.image}}" style="margin:auto;">
+        <div class="carousel-caption">
+          <h4>Slide {{slide.id}}</h4>
+          <p>{{slide.name}}</p>
+        </div>
+      </uib-slide>
+    </uib-carousel>
+  </div>
+
+<div ng-repeat="orderItem in order.orderItems">
+     <section class="tab" ng-controller="OrderItemTabController as tabController">
+        <ul class="nav nav-pills">
+          <li ng-class="{action:tabController.isSet('Description')}">
+            <a href ng-click="tabController.setTab('Description')">Description</a></li>
+          <li ng-class="{action:tabController.isSet('Specs')}">
+            <a href ng-click="tabController.setTab('Specs')">Specs</a></li>
+          <li ng-class="{action:tabController.isSet('Reviews')}">
+            <a href ng-click="tabController.setTab('Reviews')">Reviews</a></li>
+        </ul>
+        <div class="panel" ng-show="tabController.isSet('Description')">
+          <h4>Description</h4>
+          <blockquote></blockquote>
+        </div>
+        <div class="panel" ng-show="tabController.isSet('Specs')">
+          <h4>Specs</h4>
+          <blockquote>Shine: </blockquote>
+        </div>
+        <div class="panel" ng-show="tabController.isSet('Reviews')">
+          <h4>Reviews</h4>
+          <blockquote></blockquote>
+        </div>
+      </section>
+</div>
+
+  <!-- Sidebars -->
+  <div class="sidebar sidebar-left">left</div>
+  <div class="sidebar sidebar-right">right</div>
+
+  <div class="app">
+    <div class="navbar navbar-app navbar-absolute-top">top</div>
+    <div class="navbar navbar-app navbar-absolute-bottom">bottom</div>
+
+    <!-- App body -->
+
+    <div class='app-body'>
+      <div class='app-content'>
+        <ng-view></ng-view>
+      </div>
+    </div>
+  </div><!-- ~ .app -->
+
+  <!-- Modals and Overlays -->
+  <div ui-yield-to="modals"></div>
 </body>
 </html>

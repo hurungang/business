@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 13:07:15 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Commodity" table="commodity" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="commodityProvider" class="com.runtech.onlineshop.model.CommodityProvider" fetch="select" lazy="false">
+            <column name="PROVIDER_ID" />
+        </many-to-one>
+        <many-to-one name="commodityCategory" class="com.runtech.onlineshop.model.CommodityCategory" fetch="select" lazy="false">
+            <column name="CATEGORY_ID" />
+        </many-to-one>
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select" lazy="false">
+            <column name="AREA_ID" />
+        </many-to-one>
+        <property name="commodityBaseId" type="java.lang.Integer">
+            <column name="COMMODITY_BASE_ID" />
+        </property>
+        <property name="parentCommodityId" type="java.lang.Integer">
+            <column name="PARENT_COMMODITY_ID" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="shortName" type="string">
+            <column name="SHORT_NAME" length="50" not-null="true" />
+        </property>
+        <property name="summary" type="string">
+            <column name="SUMMARY" length="1000" />
+        </property>
+        <property name="standard" type="string">
+            <column name="STANDARD" length="100" />
+        </property>
+        <property name="minimumBuy" type="java.lang.Integer">
+            <column name="MINIMUM_BUY" not-null="true" />
+        </property>
+        <property name="picturePath" type="string">
+            <column name="PICTURE_PATH" length="256" not-null="true" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="originalPrice" type="big_decimal">
+            <column name="ORIGINAL_PRICE" precision="10" />
+        </property>
+        <property name="price" type="big_decimal">
+            <column name="PRICE" precision="10" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="65535" />
+        </property>
+        <property name="specification" type="string">
+            <column name="SPECIFICATION" length="65535" />
+        </property>
+        <property name="instruction" type="string">
+            <column name="INSTRUCTION" length="65535" />
+        </property>
+        <set name="commodityPictures" table="commodity_picture" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="COMMODITY_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityPicture" />
+        </set>
+    </class>
+</hibernate-mapping>

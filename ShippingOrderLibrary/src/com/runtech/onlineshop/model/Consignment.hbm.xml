@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-3 10:52:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Consignment" table="consignment" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="consignmentTitle" type="string">
+            <column name="CONSIGNMENT_TITLE" length="100" />
+        </property>
+        <property name="consignmentDescription" type="string">
+            <column name="CONSIGNMENT_DESCRIPTION" length="65535" />
+        </property>
+        <property name="consignmentOperator" type="string">
+            <column name="CONSIGNMENT_OPERATOR" length="100" />
+        </property>
+        <property name="consignmentPosition" type="string">
+            <column name="CONSIGNMENT_POSITION" length="1000" />
+        </property>
+        <property name="consignmentCompany" type="string">
+            <column name="CONSIGNMENT_COMPANY" length="1000" />
+        </property>
+        <property name="consignmentCompanyAcn" type="string">
+            <column name="CONSIGNMENT_COMPANY_ACN" length="1000" />
+        </property>
+        <property name="consignmentCompanyTaxNo" type="string">
+            <column name="CONSIGNMENT_COMPANY_TAX_NO" length="1000" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="CREATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="deliveryTime" type="timestamp">
+            <column name="DELIVERY_TIME" length="19" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="comment" type="string">
+            <column name="COMMENT" length="1000" />
+        </property>
+        <set name="consignmentPictures" table="consignment_picture" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="CONSIGNMENT_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.ConsignmentPicture" />
+        </set>
+    </class>
+</hibernate-mapping>

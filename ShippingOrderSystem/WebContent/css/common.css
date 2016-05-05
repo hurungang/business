@@ -1,0 +1,351 @@
+@CHARSET "ISO-8859-1";
+
+a	{
+	text-decoration:none;
+	}
+	
+a:visited	{
+	text-decoration:none;
+	}
+		
+a:hover	{
+	color:#FFFF99;
+	text-decoration:underline;
+	}
+
+
+	
+
+
+#header #welcome a	{
+	font-weight: bold;
+	color:#FFFF77;
+	font-size:11px;
+	text-decoration:underline;
+	margin-left: 10pt;
+	
+	}
+#header #welcome a:hover	{
+	color:#FFFFFF;
+	font-size:11px;
+	text-decoration:none;
+	}
+
+	
+/* menu css */
+#topNav .invisible {
+  background-color: #B3B3C2;
+  padding: 2pt;
+  margin-left: 5pt;
+  height: 15pt;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #A3A3B2;
+}
+
+#topNav .menu_1_false {
+  background-color: #B3B3C2;
+  padding: 2pt;
+  margin-left: 5pt;
+  height: 15pt;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#topNav .menu_1_true {
+  background-color: #E3E3F2;
+  padding: 2pt;
+  margin-left: 5pt;
+  height: 15pt;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#topNav .menu_0_true a{
+  background-color: #E3E3F2;
+  padding: 2pt;
+  margin-left: 5pt;
+  height: 15pt;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#topNav .menu_0_false a{
+  background-color: #B3B3C2;
+  padding: 2pt;
+  margin-left: 5pt;
+  height: 15pt;
+  font-size: 12pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#leftNav .menu_0_false {
+  background-color: #B3B3D2;
+  padding-left: 5pt;
+  margin-bottom: 1pt;
+  height: 15pt;
+  font-size: 15pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#leftNav .menu_0_true {
+  background-color: #E3E3F2;
+  padding-left: 5pt;
+  margin-bottom: 1pt;
+  height: 15pt;
+  font-size: 15pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#leftNav .menu_0_false a{
+  font-size: 15pt;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+#leftNav .menu_1_false {
+  background-color: #E3E3F2;
+  border-top: 1px #EFEFFF solid;
+  border-bottom: 1px #D3D3E2 solid;
+  padding: 5px 10px;
+  height: 15pt;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #333333;
+}
+
+#leftNav .menu_1_true {
+  background-color: #E9E9FF;
+  border-top: 1px #F9F9FF solid;
+  border-bottom: 1px #D9D9E9 solid;
+  padding: 5px 10px;
+  height: 15pt;
+  font-size: 11pt;
+  font-weight: bold;
+  color: #333333;
+}
+#leftNav .menu_1_false a{
+  font-size: 11pt;
+  font-weight: bold;
+  color: #333333;
+}
+
+#leftNav .menu_2_false {
+  background-color: #F0F0F9;
+  border-top: 1px #F9F9FF solid;
+  border-bottom: 1px #D9D9E9 solid;
+  padding: 5px 20px;
+  height: 15pt;
+  font-size: 10pt;
+  color: #777777;
+}
+
+#leftNav .menu_2_true {
+  background-color: #F0F9F9;
+  border-top: 1px #F9F9FF solid;
+  border-bottom: 1px #D9D9E9 solid;
+  padding: 5px 20px;
+  height: 15pt;
+  font-size: 10pt;
+  color: #777777;
+}
+
+#leftNav .menu_2_false a{
+  font-size: 10pt;
+  color: #777777;
+}
+
+#leftNav .menu_3_false {
+  background-color: #F9F9F9;
+  border-top: 1px #F9F9FF solid;
+  border-bottom: 1px #D9D9E9 solid;
+  padding: 5px 30px;
+  height: 15pt;
+  font-size: 9pt;
+  color: #777777;
+}
+
+#leftNav .menu_3_true {
+  background-color: #F9F9FF;
+  border-top: 1px #F9F9FF solid;
+  border-bottom: 1px #D9D9E9 solid;
+  padding: 5px 30px;
+  margin-bottom: 1pt;
+  height: 15pt;
+  font-size: 9pt;
+  color: #777777;
+}
+
+#leftNav .menu_3_false a{
+  font-size: 9pt;
+  color: #777777;
+}
+
+#bodyTitle #title{
+	font-family: "Times New Roman";
+	font-size: 14pt;
+	color: #F0F0FE;
+	border-bottom: 2pt solid #777777;
+}
+
+#bodyTitle #title span{
+	padding: 5px 5px 0px 5px;
+	background-color:#777777; 
+}
+
+#bodyTitle #subtitle{
+	font-size: 9pt;
+	font-family: Arial;
+	color: #666688;
+	padding: 2px 5px 0px 5px;
+	float:right;
+}
+
+
+#body form #save {
+	background-image:url(/images/btn_save.png);
+	background-position:  3px 3px;
+	background-repeat:  no-repeat;
+}
+
+#body form #cancel {
+	background-image:url(/images/btn_cancel.png);
+	background-position:  3px 3px;
+	background-repeat:  no-repeat;
+}
+
+#body form #delete {
+	background-image:url(/images/btn_delete.png);
+	background-position:  3px 3px;
+	background-repeat:  no-repeat;
+}
+
+#body form #duplicate {
+	background-image:url(/images/btn_duplicate.png);
+	background-position:  3px 3px;
+	background-repeat:  no-repeat;
+}
+#body form .listTable{
+  width: 100%;
+}
+
+#body form .pager{
+  width: 100%;
+}
+
+#body form .pager span{
+  padding-left: 10px;
+}
+
+#body form .listTable{
+  padding: 1px;
+  border: 2px solid #F0F0F0;
+  background: #EFEFCF;
+}
+
+#body form .listTable th{
+  background-color:#6F6F69;
+  padding: 3pt 5pt 3pt 5pt;
+  font-size: 10pt;
+  font-weight: bold;
+  white-space: nowrap;
+  color: #FFFFFF;
+  border-bottom: 2px solid #3F3F2F;
+}
+
+#body form .listTable td{
+  background-color:#F9FEFF;
+  padding: 3pt 5pt;
+  font-size: 10pt;
+  border-bottom: 1px dotted #9F9F8F;
+}
+
+#body form .listTable th a{
+	color: #FFFFFF;
+}
+
+table.wwFormTable{
+  width: 100%;
+  padding: 1px;
+  border: 2px solid #F0F0F0;
+  background: #FFFFFF;
+}
+
+table.wwFormTable td {
+	font-size: 10pt;
+	background-color:#FFFFFF;
+}
+
+table.wwFormTable .tdLabel {
+	text-align:right; 
+	background-color:#EEE0B0;
+}
+
+table.wwFormTable .tdControl {
+	background-color:#EEEEF0;
+}
+.warningMessage			{
+padding:5px 5px 5px 25px;
+border:1px solid #F6F600;
+background:#FFF2E9 url(/images/msg_warning.gif) 5px 5px no-repeat;
+color:#000000;
+font-size:9pt;
+font-weight:bold;
+text-align:left;
+vertical-align:middle;
+margin: 10pt;
+}
+
+.errorMessage			{
+padding:5px 5px 5px 25px;
+border:1px solid #F60;
+background:#FFF2E9 url(/images/msg_error.gif) 5px 5px no-repeat;
+color:#000000;
+font-size:9pt;
+font-weight:bold;
+text-align:left;
+vertical-align:middle;
+margin: 10pt;
+}
+
+.button {
+	border: 1px solid #777777;
+	background-color: #F5F5FA;
+	font-family: Arial;
+	font-size:14px;
+	font-weight: bold;
+	padding: 3px 10px 1px 15px;
+	height: 28px;
+}
+
+.iconButton{
+	border: 1px solid #777777;
+	height: 28px;
+	background-color: #F5F5FA;
+	font-family: Arial;
+	font-size:14px;
+	font-weight: bold;
+	padding: 5px 10px 5px 25px;
+}
+a.iconButton:hover{
+	background-color: #FFFFF5;
+	color: #555599;
+}
+.iconAdd{
+	background-image:url(/images/btn_cancel.png);
+	background-position:  3px 3px;
+	background-repeat:  no-repeat;
+}
+.wwgrp{
+float: left;
+width: 350px;
+}
+.wwgrp span{
+width: 100px;
+}

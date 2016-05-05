@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-30 21:40:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.User" table="user" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="adminByUpdater" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="UPDATER" />
+        </many-to-one>
+        <many-to-one name="userByRecommendUserId" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="RECOMMEND_USER_ID" />
+        </many-to-one>
+        <many-to-one name="userByParentUserId" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="PARENT_USER_ID" />
+        </many-to-one>
+        <many-to-one name="adminByServiceAdmin" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="SERVICE_ADMIN" />
+        </many-to-one>
+        <property name="areaId" type="java.lang.Integer">
+            <column name="AREA_ID" />
+        </property>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="256" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="FULL_NAME" length="256" />
+        </property>
+        <property name="userType" type="string">
+            <column name="USER_TYPE" length="50" />
+        </property>
+        <property name="subUserType" type="string">
+            <column name="SUB_USER_TYPE" length="50" />
+        </property>
+        <property name="importance" type="java.lang.Integer">
+            <column name="IMPORTANCE" />
+        </property>
+        <property name="age" type="java.lang.Integer">
+            <column name="AGE" />
+        </property>
+        <property name="sex" type="string">
+            <column name="SEX" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="MOBILE" length="50" unique="true" />
+        </property>
+        <property name="contact" type="string">
+            <column name="CONTACT" length="100" />
+        </property>
+        <property name="contactPosition" type="string">
+            <column name="contact_position" length="100" />
+        </property>
+        <property name="contactQq" type="string">
+            <column name="CONTACT_QQ" length="100" />
+        </property>
+        <property name="contactOther" type="string">
+            <column name="CONTACT_OTHER" length="1000" />
+        </property>
+        <property name="website" type="string">
+            <column name="WEBSITE" length="200" />
+        </property>
+        <property name="fax" type="string">
+            <column name="FAX" length="50" />
+        </property>
+        <property name="lastMaintainTime" type="timestamp">
+            <column name="LAST_MAINTAIN_TIME" length="19" not-null="true" />
+        </property>
+        <property name="sinaAuthorization" type="string">
+            <column name="SINA_AUTHORIZATION" />
+        </property>
+        <property name="qqAuthorization" type="string">
+            <column name="QQ_AUTHORIZATION" />
+        </property>
+        <property name="credentialType" type="string">
+            <column name="CREDENTIAL_TYPE" length="50" />
+        </property>
+        <property name="credentialNumber" type="string">
+            <column name="CREDENTIAL_NUMBER" length="100" />
+        </property>
+        <property name="point" type="big_decimal">
+            <column name="POINT" precision="10" />
+        </property>
+        <property name="empiricValue" type="big_decimal">
+            <column name="EMPIRIC_VALUE" precision="10" />
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="LEVEL" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="500" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="picturePath" type="string">
+            <column name="PICTURE_PATH" length="256" />
+        </property>
+        <property name="registerTime" type="timestamp">
+            <column name="REGISTER_TIME" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" />
+        </property>
+        <set name="commodityOrders" table="commodity_order" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.CommodityOrder" />
+        </set>
+        <set name="usersForParentUserId" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="PARENT_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="usersForRecommendUserId" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="RECOMMEND_USER_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+    </class>
+</hibernate-mapping>

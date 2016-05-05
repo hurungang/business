@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-4-30 21:40:10 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.CommodityProvider" table="commodity_provider" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" fetch="select" lazy="false">
+            <column name="UPDATER" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="supplyScope" type="string">
+            <column name="SUPPLY_SCOPE" length="500" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="linkman" type="string">
+            <column name="LINKMAN" length="100" />
+        </property>
+        <property name="linkmanPhone" type="string">
+            <column name="LINKMAN_PHONE" length="50" />
+        </property>
+        <property name="linkmanMobile" type="string">
+            <column name="LINKMAN_MOBILE" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="1024" />
+        </property>
+        <property name="webSite" type="string">
+            <column name="WEB_SITE" length="256" />
+        </property>
+        <property name="qq" type="string">
+            <column name="QQ" length="200" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="200" />
+        </property>
+        <property name="description" type="string">
+            <column name="DESCRIPTION" length="65535" />
+        </property>
+        <property name="contractContent" type="string">
+            <column name="CONTRACT_CONTENT" length="65535" />
+        </property>
+        <property name="contractFileName" type="string">
+            <column name="CONTRACT_FILE_NAME" length="200" />
+        </property>
+        <property name="contractFile" type="blob">
+            <column name="CONTRACT_FILE" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

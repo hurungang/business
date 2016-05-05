@@ -1,0 +1,104 @@
+/*!
+ * Bootstrap v3.1.1 (http://getbootstrap.com)
+ * Copyright 2011-2014 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+.white {
+	background: #FFFFFF;
+}
+.nav-pills {
+  margin-bottom: 30px;
+}
+
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus{
+  color: #ac005f;
+}
+
+.nav-pills > li.active > a,
+.btn-primary,
+.btn-primary:focus {
+  background: #ac005f;
+  border: 0;
+}
+
+.nav-pills > li.active > a:hover,
+.btn-primary:hover {
+  background: #ac005f;
+}
+
+.carousel-caption {
+  top: 150px;
+  bottom: auto;
+}
+.carousel-indicators {
+  top: 160px;
+  height: 10px;
+  bottom: auto;
+}
+.carousel-body {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 220px;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+}
+.carousel-container{
+	background: #777; 
+	padding:0px;
+}
+
+.media-left{
+	min-width: 200px;
+}
+.media-left img{
+	min-width: 200px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
+    font-weight: 500;
+}
+body {
+	font-size: 16px;
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
+}
+.panel.panel-default.no-margin{
+	margin:0;
+}
+.content{
+    padding: 10px;
+}
+.tab-content-container{
+	padding-top: 10px;
+}
+
+.btn.large {
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
+	font-size:24px;
+}
+.list-group-item.no-bottom-line{
+  	font-size: 18px;
+	border-bottom: 0px;
+	padding:5px;
+}
+.list-group-item>.badge-info {
+    float: right;
+}
+.badge-info {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #ffffff;
+  line-height: 1;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #777777;
+  border-radius: 10px;
+}

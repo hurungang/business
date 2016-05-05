@@ -74,7 +74,7 @@ public class AuthenticationAction extends StrutsAction implements ServletRequest
 				this.addActionError(getText(ERROR_LOGIN_FAILURE));
 			}
 		} catch (ModelException e) {
-			LOG.error(e);
+			LOG.error(e.getMessage());
 			this.addActionError(getText(ERROR_LOGIN_FAILURE));
 		}
 		return this.getResultFailure();
@@ -138,7 +138,7 @@ public class AuthenticationAction extends StrutsAction implements ServletRequest
 				this.addActionError(getText(ERROR_LOGIN_FAILURE));
 			}
 		} catch (ModelException e) {
-			LOG.error(e);
+			LOG.error(e.getMessage());
 			this.addActionError(getText(ERROR_LOGIN_FAILURE));
 		}
 		return this.getResultFailure();

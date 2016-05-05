@@ -1,0 +1,61 @@
+
+<div  ng-show="queryFailed" class="scrollable">
+	<div class="scrollable-content">
+		<divclass="panel panel-default">
+			<div class="panel-body">
+				<div class="alert alert-danger" role="alert">
+					<strong>查询失败</strong> 无法为你找到指定的商品，参数错误。
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-show="!queryFailed" class="scrollable">
+	<div class="scrollable-content">
+		<div class="panel panel-default no-margin">
+			<div class="panel-heading">
+				<div>
+					<h1>产品信息<small> - 以下是该产品的详细介绍</small></h1>
+				</div>
+			</div>
+			<div  class="panel-body" height="200">
+				<h3 class="media-heading">{{commodity.name}} <small>{{commodity.shortName}}</small></h3>
+				<h4>{{commodity.standard}}</h4>
+				<p>{{commodity.summary}}</p>
+				<uib-carousel active="0" interval="5000" no-wrap="false">
+					<uib-slide ng-repeat="picture in commodity.commodityPictures"
+					index="$index"> <img ng-src="{{picture.path}}"
+					style="height: 200px; margin: auto;">
+						<div class="carousel-caption">
+							<h4>{{picture.description}}</h4>
+						</div>
+					</uib-slide> 
+				</uib-carousel>
+			</div>
+			<div class="tab-content-container" ng-controller="TabController as tabController">
+				<div class="btn-group justified nav-tabs">
+					<a href ng-click="tabController.setTab('1')"
+						ng-class="{active:tabController.isSet('1')}"
+						class="btn btn-default">商品简介</a> <a href
+						ng-click="tabController.setTab('2')"
+						ng-class="{active:tabController.isSet('2')}"
+						class="btn btn-default">使用说明</a> <a href
+						ng-click="tabController.setTab('3')"
+						ng-class="{active:tabController.isSet('3')}"
+						class="btn btn-default">注意事项</a>
+				</div>
+				
+				<div class="panel-body">
+					<div ng-show="tabController.isSet('1')" ng-bind-html="commodity.description">
+					</div>
+					<div ng-show="tabController.isSet('2')" ng-bind-html="commodity.instruction">
+					</div>
+					<div ng-show="tabController.isSet('3')" ng-bind-html="commodity.specification">
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

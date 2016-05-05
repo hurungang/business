@@ -1,0 +1,84 @@
+<div class="scrollable">
+	<div class="scrollable-content">
+		<div  class="panel panel-default no-margin">
+
+			<div class="panel-heading">
+					<h1>订单信息<small> - 以下是该订单的详情</small></h1>
+			</div>
+			
+			<div class="panel-body">
+				<div ng-controller="AccordionController as accordionCtrl">
+					<div ng-click="accordionCtrl.click()">
+						<h3 class="panel-body-heading">订单详情 - 编号: {{order.id}}</h4>
+					</div>
+					<div ng-show="accordionCtrl.isVisiable()">
+						<div>
+							<ul class="list-group">
+								<li class="list-group-item no-bottom-line">联系人:<span class="badge-info">{{order.contact}}</span></li>
+								<li class="list-group-item no-bottom-line">送货地址:<span class="badge-info">{{order.deliveryAddress}}</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			
+				<div ng-controller="AccordionController as accordionCtrl">
+					<div ng-click="accordionCtrl.click()">
+						<h3 class="panel-body-heading">发货详情</h4>
+					</div>
+					<div ng-show="accordionCtrl.isVisiable()">
+						<div>
+							<ul class="list-group">
+								<li class="list-group-item no-bottom-line">发货批次:<span class="badge-info">{{order.consignment.consignmentTitle}}</span></li>
+								<li class="list-group-item no-bottom-line">发货时间:<span class="badge-info">{{order.consignment.deliveryTime}}</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+	
+				<div ng-controller="AccordionController as accordionCtrl">
+					<div ng-click="accordionCtrl.click()">
+						<h3 class="panel-body-heading">正品授权和发货证明附件</h4>
+					</div>
+					<div  ng-show="accordionCtrl.isVisiable()">
+						<div class="carousel-container">
+								<div>
+									<uib-carousel active="0" interval="5000" no-wrap="false">
+									<uib-slide
+										ng-repeat="slide in order.consignment.consignmentPictures"
+										index="$index"> <img
+										ng-src="{{slide.picturePath}}" height="50"
+										style="height: 200px; margin: auto;">
+									<div class="carousel-caption">
+										<h4>{{slide.pictureName}}</h4>
+									</div>
+	
+									</uib-slide> </uib-carousel>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer" ng-controller="AccordionController as accordionCtrl">
+				<div ng-click="accordionCtrl.click()">
+					<h3 class="panel-body-heading">订单内容</h4>
+				</div>
+				<div  ng-show="accordionCtrl.isVisiable()">
+					<div>
+						  <!-- Table -->
+					  <table class="table">
+					    <thead><tr><th>图片</th><th>名称</th><th>数量</th><th>更多</th></tr></thead>
+					    <tbody>
+					    	<tr ng-repeat="orderItem in order.commodityOrderItems">
+					    		<td><img ng-src="{{orderItem.commodity.picturePath}}" style="height: 50px; margin: auto;"></td>
+					    		<td>{{orderItem.commodity.name}}</td><td>{{orderItem.commodityNumber}}</td>
+					    		<td><a class="btn btn-primary" href="#/commodity/{{orderItem.commodity.id}}" role="button">详细...</a></td>
+					    	</tr>
+					    </tbody>
+					  </table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
