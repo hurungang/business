@@ -1,15 +1,23 @@
 package com.runtech.onlineshop.form;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.criterion.Order;
 
-import com.opensymphony.xwork2.ActionContext;
+import com.google.gson.JsonObject;
+import com.runtech.onlineshop.model.Area;
 import com.runtech.onlineshop.model.Commodity;
+import com.runtech.onlineshop.model.CommodityCategory;
+import com.runtech.onlineshop.model.CommodityPicture;
+import com.runtech.onlineshop.model.CommodityProvider;
+import com.runtech.onlineshop.model.Commodity;
+import com.runtech.onlineshop.model.CommodityPicture;
 import com.runtech.web.action.PageAction;
 import com.runtech.web.dao.ModelHome;
 import com.runtech.web.dispatcher.RuntechContext;
@@ -29,6 +37,8 @@ public class CommodityForm extends Commodity implements ModelForm {
 	private File picture;
 	private String pictureFileName;
 	private String keywords;
+	private CommodityPictureForm uploadPicture = new CommodityPictureForm();
+	JsonObject ajaxResult = new JsonObject();
 	
 	public CommodityForm() {
 		super();
@@ -78,15 +88,16 @@ public class CommodityForm extends Commodity implements ModelForm {
 	public boolean prepare(RuntechContext context){
 		// TODO Auto-generated method stub
 		ModelHome modelHome = new ModelHome();
-		Commodity originalCommodity = (Commodity) modelHome.findById(new Commodity(), this.getId());
-		return prepare(context, modelHome,originalCommodity);
+		Commodity original = (Commodity) modelHome.findById(new Commodity(), this.getId());
+		return prepare(context, modelHome,original);
 	}
 
-	private boolean prepare(RuntechContext context, ModelHome modelHome, Commodity originalCommodity) {
+	private boolean prepare(RuntechContext context, ModelHome modelHome, Commodity original) {
 		String defaultPicturePath;
-		if(originalCommodity!=null){
-			defaultPicturePath = originalCommodity.getPicturePath();
-			this.setStatus(originalCommodity.getStatus());
+		if(original!=null){
+			defaultPicturePath = original.getPicturePath();
+			this.setStatus(original.getStatus());
+			this.setCommodityPictures(original.getCommodityPictures());
 		}else{
 			defaultPicturePath = DEFAULT_IMG_COMMODITY;
 //			this.setStatus(Constant.PENDING_STATUS);
@@ -105,11 +116,25 @@ public class CommodityForm extends Commodity implements ModelForm {
 					e.printStackTrace();
 					return false;
 				}
-				String filePath = context.saveFile(this.picture,fileName,true);
+				String filePath = context.saveImage(this.picture,fileName,true);
 				this.setPicturePath(filePath);
 			}
 		}else{
 			this.setPicturePath(defaultPicturePath);
+		}
+		if(this.areaId!=null){
+			this.setArea((Area)modelHome.findById(new Area(), this.areaId));
+		}
+		this.setCommodityCategory((CommodityCategory)modelHome.findById(new CommodityCategory(), this.categoryId));
+		this.setCommodityProvider((CommodityProvider)modelHome.findById(new CommodityProvider(), this.providerId));
+		if(this.getDescription()!=null){
+			this.setDescription(context.extractAllImages(this.getDescription()));
+		}
+		if(this.getSpecification()!=null){
+			this.setSpecification(context.extractAllImages(this.getSpecification()));
+		}
+		if(this.getInstruction()!=null){
+			this.setInstruction(context.extractAllImages(this.getInstruction()));
 		}
 		this.setUpdater(context.getUser().getId());
 		this.setUpdateTime(new Date());
@@ -188,17 +213,89 @@ public class CommodityForm extends Commodity implements ModelForm {
 		// TODO Auto-generated method stub
 		ModelHome modelHome = new ModelHome();
 		try {
+			boolean reload = true;
 			modelHome.beginTransaction();
 			PageAction action = (PageAction) context.getAction();
-
+			Commodity original = (Commodity) modelHome.findById(new Commodity(), this.getId());
+			if(Constant.ACTION_SAVE_ALL.equals(action.getActionType())){
+				prepare(context, modelHome, original);
+				Commodity commodity = (Commodity) this.getModel();
+				commodity = (Commodity) modelHome.merge(commodity);
+			}else if(Constant.ACTION_DUPLICATE_ALL.equals(action.getActionType())){
+				this.copyFrom(original);
+				this.clearId();
+				Commodity newCommodity = (Commodity) this.getModel();
+				newCommodity = (Commodity) modelHome.merge(newCommodity);
+				Set<CommodityPicture> commodityPictures = original.getCommodityPictures();
+				for (CommodityPicture commodityPicture : commodityPictures) {
+					CommodityPictureForm commodityPictureForm = new CommodityPictureForm(commodityPicture);
+					commodityPictureForm.setCommodity(newCommodity);
+					commodityPictureForm.clearId();
+					CommodityPicture tempCommodityPicture = (CommodityPicture) modelHome.merge(commodityPictureForm.getModel());
+					newCommodity.getCommodityPictures().add(tempCommodityPicture);
+				}
+				this.copyFrom(newCommodity);
+				this.setUpdateTime(new Date());
+				context.setResult(action.getResultDefault());
+				reload = false;
+			}
+			else if (Constant.ACTION_SPECIAL_DELETE.equals(action.getActionType()))
+			{
+				if(this.getIds() == null)
+				{
+					original.setStatus(Constant.STATUS_DELETED);
+					modelHome.save(original);
+				}
+				else
+				{
+					for(Serializable id: this.getIds())
+					{
+						Commodity modelResult = (Commodity) modelHome.findById(new Commodity(), id);
+						modelResult.setStatus(Constant.STATUS_DELETED);
+						modelHome.save(modelResult);
+					}
+				}
+			}
+			else if(action.getActionType().equals(Constant.ACTION_SAVE_PICTURE)){
+				if(this.uploadPicture!=null&&this.uploadPicture.getPicture()!=null){
+					this.uploadPicture.savePicture(context);
+					this.uploadPicture.setCommodity(original);
+					modelHome.save(this.uploadPicture.getModel());
+				}
+			}
+			else if(action.getActionType().equals(Constant.ACTION_DELETE_PICTURE)){
+				String[] parameters = context.getParameters("pictureId");
+				for (int i = 0; i < parameters.length; i++) {
+					String string = parameters[i];
+					Integer pictureId = Integer.parseInt(string);
+					modelHome.deleteById(new CommodityPicture(), pictureId);
+				}
+			}
+			
 			modelHome.commit();
+			if(reload){
+				this.reload();
+			}
+			ajaxResult.addProperty(Constant.AJAX_SUCCESS, true);
 			if(context.getResult()==null){
 				context.setResult(action.getResultSuccess());
 			}
 		} catch (Exception e) {
 			context.setError(e.getLocalizedMessage());
 			modelHome.rollback();
+			ajaxResult.addProperty(Constant.AJAX_SUCCESS, false);
+			ajaxResult.addProperty(Constant.AJAX_ERROR_MESSAGE, e.toString());
 		}
+		if(context.getAjax()){
+			context.setResult(Constant.RESULT_AJAX);
+		}
+	}
+	
+	private void reload() throws ModelException {
+		// TODO Auto-generated method stub
+		ModelHome modelHome = new ModelHome();
+		Commodity original = (Commodity) modelHome.findById(new Commodity(), this.getId());
+		this.copyFrom(original);
 	}
 	
 	public static List<CommodityForm> getAllCommodity() throws ModelException
@@ -240,5 +337,40 @@ public class CommodityForm extends Commodity implements ModelForm {
 	public void finish(RuntechContext context) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Integer getCategoryId() {
+		return this.getCommodityCategory().getId();
+	}
+
+	public Integer getAreaId() {
+		return this.getArea().getId();
+	}
+	 
+	public Integer getProviderId() {
+		return this.getCommodityProvider().getId();
+	}
+	public CommodityPictureForm getUploadPicture() {
+		return uploadPicture;
+	}
+
+	public void setUploadPicture(CommodityPictureForm uploadPicture) {
+		this.uploadPicture = uploadPicture;
+	}
+
+	public JsonObject getAjaxResult() {
+		return ajaxResult;
+	}
+
+	public void setAjaxResult(JsonObject ajaxResult) {
+		this.ajaxResult = ajaxResult;
+	}
+
+	public static Commodity getComodityByExternalId(String cellValue) throws ModelException {
+
+		ModelHome modelHome = new ModelHome();
+		Commodity commodity = new Commodity(); 
+		commodity.setExternalId(cellValue);
+		return (Commodity) modelHome.findByKeyExample(commodity);
 	}
 }

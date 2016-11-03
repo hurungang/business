@@ -1,5 +1,5 @@
 package com.runtech.onlineshop.model;
-// Generated 2016-5-4 9:52:57 by Hibernate Tools 3.4.0.CR1
+// Generated 2016-5-15 18:37:17 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +13,7 @@ public class CommodityProvider implements java.io.Serializable {
 	private Integer id;
 	private Admin admin;
 	private String name;
+	private String type;
 	private String supplyScope;
 	private String phone;
 	private String linkman;
@@ -23,12 +24,17 @@ public class CommodityProvider implements java.io.Serializable {
 	private String qq;
 	private String email;
 	private String description;
+	private String registerNo;
+	private String taxNo;
+	private String organizationNo;
 	private String contractContent;
 	private String contractFileName;
 	private byte[] contractFile;
 	private Date updateTime;
 	private String status;
 	private String remark;
+	private Set<Consignment> consignmentsForDeliveryCompany = new HashSet<Consignment>(0);
+	private Set<Consignment> consignmentsForCompany = new HashSet<Consignment>(0);
 	private Set<Commodity> commodities = new HashSet<Commodity>(0);
 
 	public CommodityProvider() {
@@ -39,12 +45,15 @@ public class CommodityProvider implements java.io.Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public CommodityProvider(Admin admin, String name, String supplyScope, String phone, String linkman,
+	public CommodityProvider(Admin admin, String name, String type, String supplyScope, String phone, String linkman,
 			String linkmanPhone, String linkmanMobile, String address, String webSite, String qq, String email,
-			String description, String contractContent, String contractFileName, byte[] contractFile, Date updateTime,
-			String status, String remark, Set<Commodity> commodities) {
+			String description, String registerNo, String taxNo, String organizationNo, String contractContent,
+			String contractFileName, byte[] contractFile, Date updateTime, String status, String remark,
+			Set<Consignment> consignmentsForDeliveryCompany, Set<Consignment> consignmentsForCompany,
+			Set<Commodity> commodities) {
 		this.admin = admin;
 		this.name = name;
+		this.type = type;
 		this.supplyScope = supplyScope;
 		this.phone = phone;
 		this.linkman = linkman;
@@ -55,12 +64,17 @@ public class CommodityProvider implements java.io.Serializable {
 		this.qq = qq;
 		this.email = email;
 		this.description = description;
+		this.registerNo = registerNo;
+		this.taxNo = taxNo;
+		this.organizationNo = organizationNo;
 		this.contractContent = contractContent;
 		this.contractFileName = contractFileName;
 		this.contractFile = contractFile;
 		this.updateTime = updateTime;
 		this.status = status;
 		this.remark = remark;
+		this.consignmentsForDeliveryCompany = consignmentsForDeliveryCompany;
+		this.consignmentsForCompany = consignmentsForCompany;
 		this.commodities = commodities;
 	}
 
@@ -86,6 +100,14 @@ public class CommodityProvider implements java.io.Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getSupplyScope() {
@@ -168,6 +190,30 @@ public class CommodityProvider implements java.io.Serializable {
 		this.description = description;
 	}
 
+	public String getRegisterNo() {
+		return this.registerNo;
+	}
+
+	public void setRegisterNo(String registerNo) {
+		this.registerNo = registerNo;
+	}
+
+	public String getTaxNo() {
+		return this.taxNo;
+	}
+
+	public void setTaxNo(String taxNo) {
+		this.taxNo = taxNo;
+	}
+
+	public String getOrganizationNo() {
+		return this.organizationNo;
+	}
+
+	public void setOrganizationNo(String organizationNo) {
+		this.organizationNo = organizationNo;
+	}
+
 	public String getContractContent() {
 		return this.contractContent;
 	}
@@ -214,6 +260,22 @@ public class CommodityProvider implements java.io.Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Set<Consignment> getConsignmentsForDeliveryCompany() {
+		return this.consignmentsForDeliveryCompany;
+	}
+
+	public void setConsignmentsForDeliveryCompany(Set<Consignment> consignmentsForDeliveryCompany) {
+		this.consignmentsForDeliveryCompany = consignmentsForDeliveryCompany;
+	}
+
+	public Set<Consignment> getConsignmentsForCompany() {
+		return this.consignmentsForCompany;
+	}
+
+	public void setConsignmentsForCompany(Set<Consignment> consignmentsForCompany) {
+		this.consignmentsForCompany = consignmentsForCompany;
 	}
 
 	public Set<Commodity> getCommodities() {

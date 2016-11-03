@@ -1,25 +1,31 @@
 package com.runtech.onlineshop.form;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.criterion.Order;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.runtech.onlineshop.model.Area;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.runtech.onlineshop.model.Commodity;
 import com.runtech.onlineshop.model.CommodityOrder;
 import com.runtech.onlineshop.model.CommodityOrderItem;
 import com.runtech.onlineshop.model.User;
+import com.runtech.util.QRCodeUtils;
 import com.runtech.web.action.PageAction;
 import com.runtech.web.dao.ModelHome;
 import com.runtech.web.dispatcher.RuntechContext;
 import com.runtech.web.form.ModelForm;
 import com.runtech.web.runtime.ModelException;
+import com.runtech.web.runtime.RuntechProperties;
 import com.runtech.web.runtime.RuntechRuntimeException;
 import com.runtech.web.ui.Pager;
 import com.runtech.web.util.Constant;
@@ -36,6 +42,8 @@ public class CommodityOrderForm extends CommodityOrder implements ModelForm{
 	private String nextLocation;
 	private Integer promotionId;
 	private Integer orderId;
+	JsonObject ajaxResult = new JsonObject();
+	private ByteArrayInputStream inputStream;
 
 
 	public CommodityOrderForm() {
@@ -113,16 +121,39 @@ public class CommodityOrderForm extends CommodityOrder implements ModelForm{
 					}
 				}
 			}
+			else if(action.getActionType().equals(Constant.ACTION_QRCODE)){
+				ByteArrayOutputStream output = new ByteArrayOutputStream();
+				String encodeddata = "http://"+RuntechProperties.getDomain()+"/"+context.getServletContext().getContextPath()+"/front/index.html#/order/"+this.getFormId();
+				QRCodeUtils.qrCodeEncode(encodeddata, output);
+				ByteArrayInputStream input = new ByteArrayInputStream(output
+						.toByteArray());
+				this.setInputStream(input);
+				context.setResult(Constant.RESULT_STREAM);
+				context.setAjax(false);
+			}
 			modelHome.commit();
 			this.clearId();
+			ajaxResult.addProperty(Constant.AJAX_SUCCESS, true);
 		} catch (Exception e) {
 			context.getAction().addActionError(e.toString());
 			modelHome.rollback();
 			this.copyFrom(commodityOrder);
+			ajaxResult.addProperty(Constant.AJAX_SUCCESS, false);
+			ajaxResult.addProperty(Constant.AJAX_ERROR_MESSAGE, e.toString());
+		}
+		if(context.getAjax()){
+			context.setResult(Constant.RESULT_AJAX);
 		}
 		
 	}
 
+	private void setInputStream(ByteArrayInputStream input) {
+		this.inputStream = input;
+	}
+
+	public ByteArrayInputStream getInputStream() {
+		return this.inputStream;
+	}
 	public String getNextLocation() {
 		return nextLocation;
 	}
@@ -344,4 +375,7 @@ public class CommodityOrderForm extends CommodityOrder implements ModelForm{
 		return orderId;
 	}
 
+	public JsonObject getAjaxResult() {
+		return ajaxResult;
+	}
 }

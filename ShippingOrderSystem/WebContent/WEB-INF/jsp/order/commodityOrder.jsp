@@ -140,6 +140,7 @@
 				</td></tr>
 				</s:iterator>
 			</table>
+			<a href="#addItemDialog" class="button" rel="modal"><s:property value="%{getText('text.submit.addChild')}" /></a>
 	</div>
 	
 	<s:component template="component.ftl">

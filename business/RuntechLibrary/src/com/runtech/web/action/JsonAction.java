@@ -1,13 +1,10 @@
 package com.runtech.web.action;  
   
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,9 +14,14 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.criterion.Order;
 
 import com.opensymphony.xwork2.ModelDriven;
+import com.runtech.util.BeanUtil;
 import com.runtech.web.dao.ModelHome;
+import com.runtech.web.dispatcher.FilterDispatcher;
+import com.runtech.web.dispatcher.RuntechContext;
+import com.runtech.web.form.ModelForm;
 import com.runtech.web.form.ModelJson;
 import com.runtech.web.runtime.ModelException;
+import com.runtech.web.ui.Pager;
 import com.runtech.web.util.Constant;  
   
 /** 
@@ -40,10 +42,13 @@ public class JsonAction extends StrutsAction implements ModelDriven<Object>,Sess
 
 	protected final Logger exceptionLogger=Logger.getLogger(JsonAction.class);
 
+	private RuntechContext context;
+	
 	private Order orderBy;
 	
 	public String json() {  
 
+		this.context.setAction(this);
 		// dataMap中的数据将会被Struts2转换成JSON字符串，所以这里要先清空其中的数据  
         result = new HashMap<String, Object>();  
         try {
@@ -58,12 +63,14 @@ public class JsonAction extends StrutsAction implements ModelDriven<Object>,Sess
 				Object modelResult = modelHome.findById(this.modelJson.getModel(), this.modelJson.getId());
 				if(modelResult!=null){
 					this.modelJson.copyFrom(modelResult);
-					result.put("result", this.modelJson.toMap());
+					Map map = this.modelJson.toMap();
+					result.put("result", map);
 				}
 			}
         		
         	}else if(Constant.ACTION_LIST.equals(this.actionType)){
-        		result.put("result", this.getModelList());
+        		List modelMapList = this.modelJson.action(context);
+				result.put("result", modelMapList);
         	}
 	        // 放入一个是否操作成功的标识  
 	        result.put("success", true);  
@@ -94,9 +101,9 @@ public class JsonAction extends StrutsAction implements ModelDriven<Object>,Sess
 		Integer fetchSize = this.pager.getPageSize();
 		List<Object> modelList = new ArrayList<Object>();
 		ModelHome modelHome = new ModelHome();
-		Object newPageModelInstance = this.newPageModelInstance();
+		ModelJson newPageModelInstance = this.newPageModelInstance();
 		if(newPageModelInstance!=null){
-			modelList = modelHome.list(newPageModelInstance,orderBy,startNumber,fetchSize);
+			modelList = modelHome.list(newPageModelInstance.getModel(),orderBy,startNumber,fetchSize);
 		}
 		return modelList;
 	}
@@ -131,7 +138,11 @@ public class JsonAction extends StrutsAction implements ModelDriven<Object>,Sess
 	}
 
 	public void setObjectId(String objectId) {
-		this.objectId = objectId;
+		if(Constant.ACTION_LIST.equalsIgnoreCase(objectId)){
+			this.setActionType(Constant.ACTION_LIST);
+		}else{
+			this.objectId = objectId;
+		}
 	}
 
 	public void setActionType(String actionType) {
@@ -150,10 +161,30 @@ public class JsonAction extends StrutsAction implements ModelDriven<Object>,Sess
 		this.orderBy = orderBy;
 	}
 
+	public Integer getModelListCount(){
+		Integer count = 0;
+		List<Object> modelList = new ArrayList<Object>();
+		ModelHome modelHome = new ModelHome();
+		ModelJson newPageModelInstance = null;
+		try {
+			newPageModelInstance = this.newPageModelInstance();
+			if(newPageModelInstance!=null){
+				count = modelHome.getCount(newPageModelInstance.getModel());
+			}
+		} catch (ModelException e) {
+			LOG.error(e.getMessage());
+		}
+		return count;
+	}
+	
+	public Pager getPager() {
+		this.pager.setTotalSize(this.getModelListCount());
+		return this.pager;
+	}
+	
 	@Override
-	public void setServletRequest(HttpServletRequest arg0) {
-		// TODO Auto-generated method stub
-		
+	public void setServletRequest(HttpServletRequest request) {
+		this.context = (RuntechContext) request.getAttribute(FilterDispatcher.RUNTECH_CONTEXT);
 	}
 
 	@Override

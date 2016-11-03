@@ -1,0 +1,30 @@
+
+<div  ng-show="queryFailed" class="scrollable">
+	<div class="scrollable-content">
+		<divclass="panel panel-default">
+			<div class="panel-body">
+				<div class="alert alert-danger" role="alert">
+					<strong>查询失败</strong> 无法为你找到指定的内容，参数错误。
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div ng-show="!queryFailed" class="scrollable">
+	<div class="scrollable-content">
+		<div class="panel panel-default no-margin">
+			<div class="panel-heading">
+				<div>
+					<h1>{{content.title}}<small> - {{content.author}}</small></h1>
+				</div>
+			</div>
+				
+			<div class="panel-body">
+				<div ng-bind-html="content.content">
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>

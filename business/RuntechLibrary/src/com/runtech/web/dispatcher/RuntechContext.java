@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -26,6 +27,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import com.runtech.util.MailSender;
 import com.runtech.web.action.StrutsAction;
@@ -57,6 +62,7 @@ public abstract class RuntechContext {
 	private ModelForm modelForm;
 	private Map<String,String> errors = new HashMap<String,String>();
 	private MailSender mailSender = new MailSender(RuntechProperties.getProperties());
+	private Boolean ajax;
 
 	public boolean isActionSucceed() {
 		return actionSucceed;
@@ -127,13 +133,44 @@ public abstract class RuntechContext {
 		}
 
 	}
+	public String extractAllImages(String content){
+		try {
+			Document doc = Jsoup.parse(content);
+			Elements imgs = doc.select("img");
+			for (Element img : imgs) {
+
+	            String imgSrc = img.attr("src");
+	            if (imgSrc != null&&imgSrc.toLowerCase().startsWith("http")) {
+	                    String downloadImagePath = downloadImage(imgSrc);
+	                    img.attr("src", downloadImagePath); // or whatever
+	            }
+	        }
+	        return doc.body().html();
+		} catch (IOException ex) {
+			LOG.error(ex.getMessage());
+			return null;
+		}
+	}
 	
-	public String saveFile(File file, String fileName, boolean waterMark) {
+    public String downloadImage(String imgSrc) throws IOException {
+        try {
+            String fileName = imgSrc.substring(imgSrc.lastIndexOf("/") + 1);
+            URL imageUrl = new URL(imgSrc);
+            return saveImage(imageUrl, fileName, false);
+        } catch (Exception ex) {
+			LOG.error(ex.getMessage());
+        }
+        return null;
+
+    }
+	public String saveImage(File file, String fileName, boolean waterMark) {
 		ServletContext servletContext = getServletContext();
 		try {
 			String realPath = servletContext.getContext(this.action.getUploadContext()).getRealPath(this.action.getUploadImagePath());
-
-			File newFile = new File(realPath+"/"+fileName);
+			long currentTimeMillis = System.currentTimeMillis();
+			String surfix = fileName.substring(fileName.lastIndexOf(".")+1);
+			
+			File newFile = new File(realPath+"/"+currentTimeMillis+"."+surfix);
 			FileUtils.copyFile(file, newFile);
 			if(waterMark){
 				textWatermark(newFile);
@@ -146,6 +183,25 @@ public abstract class RuntechContext {
 		}
 	}
 	
+	public String saveImage(URL url, String fileName, boolean waterMark) {
+		ServletContext servletContext = getServletContext();
+		try {
+			String realPath = servletContext.getContext(this.action.getUploadContext()).getRealPath(this.action.getUploadImagePath());
+			long currentTimeMillis = System.currentTimeMillis();
+			String surfix = fileName.substring(fileName.lastIndexOf(".")+1);
+			
+			File newFile = new File(realPath+"/"+currentTimeMillis+"."+surfix);
+			FileUtils.copyURLToFile(url, newFile);
+			if(waterMark){
+				textWatermark(newFile);
+				imageWaterMark(newFile);
+			}
+			return this.action.getUploadContext()+this.action.getUploadImagePath()+"/"+newFile.getName();
+		} catch (Exception e) {
+			LOG.error(e);
+			return null;
+		}
+	}
     public void zoom(File imageFile, int outputWidth, int outputHeight, String newName, Boolean proportion) throws Exception {  
         try {  
 
@@ -445,6 +501,16 @@ public abstract class RuntechContext {
 		}else{
 			return null;
 		}
+	}
+
+	public void setAjax(Boolean ajax) {
+		// TODO Auto-generated method stub
+		this.ajax = ajax;
+	}
+
+	public Boolean getAjax() {
+		// TODO Auto-generated method stub
+		return this.ajax;
 	}
 	
 }

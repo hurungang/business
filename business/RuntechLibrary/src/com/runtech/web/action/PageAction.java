@@ -50,6 +50,8 @@ public class PageAction extends StrutsAction implements ModelDriven<Object>,Sess
 
 	private RuntechContext context;
 
+	private Boolean ajax;
+
 
 	public PageAction() {
 	}
@@ -60,6 +62,7 @@ public class PageAction extends StrutsAction implements ModelDriven<Object>,Sess
 	@Override
 	public String execute() throws Exception {
 		this.context.setAction(this);
+		this.context.setAjax(this.ajax);
 		this.context.setMerchant(this.merchant);
 		if(currentMenu==null){
 			this.addActionError(getText(Constant.ERROR_AUTHORIZATION));
@@ -429,6 +432,14 @@ public class PageAction extends StrutsAction implements ModelDriven<Object>,Sess
 		if(aMessage!=null){
 			super.addActionMessage(aMessage);
 		}
+	}
+
+	public Boolean getAjax() {
+		return ajax;
+	}
+
+	public void setAjax(Boolean ajax) {
+		this.ajax = ajax;
 	}
 	
 

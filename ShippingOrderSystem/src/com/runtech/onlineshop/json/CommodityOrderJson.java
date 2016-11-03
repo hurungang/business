@@ -1,5 +1,6 @@
 package com.runtech.onlineshop.json;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -7,6 +8,7 @@ import org.hibernate.criterion.Order;
 
 import com.runtech.onlineshop.model.CommodityOrder;
 import com.runtech.util.BeanUtil;
+import com.runtech.web.dispatcher.RuntechContext;
 import com.runtech.web.form.ModelJson;
 import com.runtech.web.runtime.ModelException;
 import com.runtech.web.util.Constant;
@@ -79,6 +81,12 @@ public class CommodityOrderJson extends CommodityOrder implements ModelJson {
 				}
 			}
 		}
+	}
+
+	@Override
+	public List action(RuntechContext context) throws ModelException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

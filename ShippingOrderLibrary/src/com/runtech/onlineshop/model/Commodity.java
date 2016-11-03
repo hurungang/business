@@ -15,6 +15,7 @@ public class Commodity implements java.io.Serializable {
 	private CommodityProvider commodityProvider;
 	private CommodityCategory commodityCategory;
 	private Area area;
+	private String externalId;
 	private Integer commodityBaseId;
 	private Integer parentCommodityId;
 	private String name;
@@ -260,6 +261,14 @@ public class Commodity implements java.io.Serializable {
 
 	public void setArea(Area area) {
 		this.area = area;
+	}
+
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 }

@@ -1,5 +1,8 @@
 package com.runtech.onlineshop.json;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -7,6 +10,9 @@ import org.hibernate.criterion.Order;
 
 import com.runtech.onlineshop.model.Commodity;
 import com.runtech.util.BeanUtil;
+import com.runtech.web.action.JsonAction;
+import com.runtech.web.dao.ModelHome;
+import com.runtech.web.dispatcher.RuntechContext;
 import com.runtech.web.form.ModelJson;
 import com.runtech.web.runtime.ModelException;
 import com.runtech.web.util.Constant;
@@ -79,6 +85,26 @@ public class CommodityJson extends Commodity implements ModelJson {
 				}
 			}
 		}
+	}
+
+	@Override
+	public List action(RuntechContext context) throws ModelException {
+
+		JsonAction action = (JsonAction) context.getAction();
+		if(Constant.ACTION_LIST.equals(action.getActionType())){
+			ModelHome modelHome = new ModelHome();
+			Commodity queryExample = new Commodity();
+			queryExample.setStatus(Constant.STATUS_APPROVED);
+			List<Object> modelList = modelHome.findByExample(queryExample);
+			List<Map> modelMapList = new ArrayList<Map>();
+			for (Iterator iterator = modelList.iterator(); iterator.hasNext();) {
+				Object object = (Object) iterator.next();
+				Map<String, Object> map = BeanUtil.toMap(object);
+				modelMapList.add(map);
+			}
+			return modelMapList;
+		}
+		return null;
 	}
 
 }

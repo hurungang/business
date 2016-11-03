@@ -75,7 +75,7 @@ public class ContentForm extends Content implements ModelForm {
 		SiteModule siteModule = (SiteModule) modelHome.findById(new SiteModule(), this.siteModuleId);
 		this.setSiteModule(siteModule);
 		if(this.picture!=null){
-			String filePath = context.saveFile(this.picture,this.pictureFileName,false);
+			String filePath = context.saveImage(this.picture,this.pictureFileName,false);
 			this.setPicturePath(filePath);
 		}
 		return true;

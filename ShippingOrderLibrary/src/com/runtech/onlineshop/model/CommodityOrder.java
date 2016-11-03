@@ -14,6 +14,8 @@ public class CommodityOrder implements java.io.Serializable {
 	private Integer id;
 	private Consignment consignment;
 	private User user;
+	private String externalId;
+	private String agent;
 	private Date dealTime;
 	private String quickRequest;
 	private String quickPropose;
@@ -233,6 +235,22 @@ public class CommodityOrder implements java.io.Serializable {
 
 	public void setCommodityOrderItems(Set<CommodityOrderItem> commodityOrderItems) {
 		this.commodityOrderItems = commodityOrderItems;
+	}
+
+	public String getExternalId() {
+		return externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
+
+	public String getAgent() {
+		return agent;
+	}
+
+	public void setAgent(String agent) {
+		this.agent = agent;
 	}
 
 }

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-15 18:37:18 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Content" table="content" catalog="bg_sos_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="commodityCategory" class="com.runtech.onlineshop.model.CommodityCategory" fetch="select">
+            <column name="CATEGORY_ID" />
+        </many-to-one>
+        <property name="siteModuleId" type="java.lang.Integer">
+            <column name="SITE_MODULE_ID" />
+        </property>
+        <property name="positionCode" type="string">
+            <column name="POSITION_CODE" length="50" not-null="true" />
+        </property>
+        <property name="typeCode" type="string">
+            <column name="TYPE_CODE" length="50" not-null="true" />
+        </property>
+        <property name="title" type="string">
+            <column name="TITLE" length="256" />
+        </property>
+        <property name="picturePath" type="string">
+            <column name="PICTURE_PATH" length="256" />
+        </property>
+        <property name="keyword" type="string">
+            <column name="KEYWORD" length="256" />
+        </property>
+        <property name="source" type="string">
+            <column name="SOURCE" length="256" />
+        </property>
+        <property name="author" type="string">
+            <column name="AUTHOR" length="100" />
+        </property>
+        <property name="content" type="string">
+            <column name="CONTENT" />
+        </property>
+        <property name="priority" type="java.lang.Integer">
+            <column name="PRIORITY" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

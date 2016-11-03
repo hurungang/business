@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.FavoriteCommodity" table="favorite_commodity">
+        <composite-id name="id" class="com.runtech.onlineshop.model.FavoriteCommodityId">
+            <key-property name="userId" type="java.lang.Integer">
+                <column name="USER_ID" />
+            </key-property>
+            <key-property name="commodityId" type="java.lang.Integer">
+                <column name="COMMODITY_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="user" class="com.runtech.onlineshop.model.User" update="false" insert="false" fetch="select">
+            <column name="USER_ID" not-null="true" />
+        </many-to-one>
+        <many-to-one name="commodity" class="com.runtech.onlineshop.model.Commodity" update="false" insert="false" fetch="select">
+            <column name="COMMODITY_ID" not-null="true" />
+        </many-to-one>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

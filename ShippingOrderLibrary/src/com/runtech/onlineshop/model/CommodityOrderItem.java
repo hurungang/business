@@ -10,6 +10,7 @@ public class CommodityOrderItem implements java.io.Serializable {
 
 	private Integer id;
 	private Commodity commodity;
+	private CommodityOrder commodityOrder;
 	private Integer commodityNumber;
 	private BigDecimal price;
 	private BigDecimal discount;
@@ -23,8 +24,9 @@ public class CommodityOrderItem implements java.io.Serializable {
 	public CommodityOrderItem() {
 	}
 
-	public CommodityOrderItem( Commodity commodity, Integer commodityNumber) {
+	public CommodityOrderItem( Commodity commodity, CommodityOrder commodityOrder, Integer commodityNumber) {
 		this.commodity = commodity;
+		this.commodityOrder = commodityOrder;
 		this.commodityNumber = commodityNumber;
 	}
 
@@ -58,6 +60,14 @@ public class CommodityOrderItem implements java.io.Serializable {
 
 	public void setCommodity(Commodity commodity) {
 		this.commodity = commodity;
+	}
+
+	public CommodityOrder getCommodityOrder() {
+		return commodityOrder;
+	}
+
+	public void setCommodityOrder(CommodityOrder commodityOrder) {
+		this.commodityOrder = commodityOrder;
 	}
 
 	public Integer getCommodityNumber() {

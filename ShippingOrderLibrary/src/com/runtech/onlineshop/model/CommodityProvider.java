@@ -1,5 +1,5 @@
 package com.runtech.onlineshop.model;
-// Generated 2016-4-30 21:40:09 by Hibernate Tools 3.4.0.CR1
+// Generated 2016-5-5 11:32:02 by Hibernate Tools 3.4.0.CR1
 
 import java.sql.Blob;
 import java.util.Date;
@@ -14,6 +14,7 @@ public class CommodityProvider implements java.io.Serializable {
 	private Integer id;
 	private Admin admin;
 	private String name;
+	private String type;
 	private String supplyScope;
 	private String phone;
 	private String linkman;
@@ -24,13 +25,15 @@ public class CommodityProvider implements java.io.Serializable {
 	private String qq;
 	private String email;
 	private String description;
+	private String registerNo;
+	private String taxNo;
+	private String organizationNo;
 	private String contractContent;
 	private String contractFileName;
 	private Blob contractFile;
 	private Date updateTime;
 	private String status;
 	private String remark;
-	private Set<Commodity> commodities = new HashSet<Commodity>(0);
 
 	public CommodityProvider() {
 	}
@@ -40,12 +43,14 @@ public class CommodityProvider implements java.io.Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public CommodityProvider(Admin admin, String name, String supplyScope, String phone, String linkman,
+	public CommodityProvider(Admin admin, String name, String type, String supplyScope, String phone, String linkman,
 			String linkmanPhone, String linkmanMobile, String address, String webSite, String qq, String email,
-			String description, String contractContent, String contractFileName, Blob contractFile, Date updateTime,
-			String status, String remark, Set<Commodity> commodities) {
+			String description, String registerNo, String taxNo, String organizationNo, String contractContent,
+			String contractFileName, Blob contractFile, Date updateTime, String status, String remark
+			) {
 		this.admin = admin;
 		this.name = name;
+		this.type = type;
 		this.supplyScope = supplyScope;
 		this.phone = phone;
 		this.linkman = linkman;
@@ -56,13 +61,15 @@ public class CommodityProvider implements java.io.Serializable {
 		this.qq = qq;
 		this.email = email;
 		this.description = description;
+		this.registerNo = registerNo;
+		this.taxNo = taxNo;
+		this.organizationNo = organizationNo;
 		this.contractContent = contractContent;
 		this.contractFileName = contractFileName;
 		this.contractFile = contractFile;
 		this.updateTime = updateTime;
 		this.status = status;
 		this.remark = remark;
-		this.commodities = commodities;
 	}
 
 	public Integer getId() {
@@ -169,6 +176,30 @@ public class CommodityProvider implements java.io.Serializable {
 		this.description = description;
 	}
 
+	public String getRegisterNo() {
+		return this.registerNo;
+	}
+
+	public void setRegisterNo(String registerNo) {
+		this.registerNo = registerNo;
+	}
+
+	public String getTaxNo() {
+		return this.taxNo;
+	}
+
+	public void setTaxNo(String taxNo) {
+		this.taxNo = taxNo;
+	}
+
+	public String getOrganizationNo() {
+		return this.organizationNo;
+	}
+
+	public void setOrganizationNo(String organizationNo) {
+		this.organizationNo = organizationNo;
+	}
+
 	public String getContractContent() {
 		return this.contractContent;
 	}
@@ -189,8 +220,8 @@ public class CommodityProvider implements java.io.Serializable {
 		return this.contractFile;
 	}
 
-	public void setContractFile(Blob contractFile) {
-		this.contractFile = contractFile;
+	public void setContractFile(Blob blob) {
+		this.contractFile = blob;
 	}
 
 	public Date getUpdateTime() {
@@ -217,12 +248,13 @@ public class CommodityProvider implements java.io.Serializable {
 		this.remark = remark;
 	}
 
-	public Set<Commodity> getCommodities() {
-		return this.commodities;
+	public String getType() {
+		return type;
 	}
 
-	public void setCommodities(Set<Commodity> commodities) {
-		this.commodities = commodities;
+	public void setType(String type) {
+		this.type = type;
 	}
+
 
 }

@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 2, 2011 11:17:41 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.Admin" table="admin">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="adminRole" class="com.runtech.onlineshop.model.AdminRole" fetch="select">
+            <column name="ROLE_ID" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="NAME" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="PASSWORD" length="256" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="FULL_NAME" length="100" />
+        </property>
+        <property name="email" type="string">
+            <column name="EMAIL" length="100" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="PHONE" length="50" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="MOBILE" length="50" />
+        </property>
+        <property name="address" type="string">
+            <column name="ADDRESS" length="1024" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" not-null="true" />
+        </property>
+        <property name="updater" type="java.lang.Integer">
+            <column name="UPDATER" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+        <set name="quickOrders" inverse="true" lazy="true" table="quick_order" fetch="select">
+            <key>
+                <column name="CONFIRM_ADMIN_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.QuickOrder" />
+        </set>
+        <set name="adminLoginLogs" table="admin_login_log" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ADMIN_ID" not-null="true" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.AdminLoginLog" />
+        </set>
+        <set name="userContracts" inverse="true" lazy="true" table="user_contract" fetch="select">
+            <key>
+                <column name="SERVICE_ADMIN" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.UserContract" />
+        </set>
+        <set name="quickComments" inverse="true" lazy="true" table="quick_comment" fetch="select">
+            <key>
+                <column name="REPLY_ADMIN_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.QuickComment" />
+        </set>
+        <set name="userMaintainLogsForAdminId" inverse="true" lazy="true" table="user_maintain_log" fetch="select">
+            <key>
+                <column name="ADMIN_ID" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.UserMaintainLog" />
+        </set>
+        <set name="users" inverse="true" lazy="true" table="user" fetch="select">
+            <key>
+                <column name="SERVICE_ADMIN" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.User" />
+        </set>
+        <set name="userMaintainLogsForUpdater" inverse="true" lazy="true" table="user_maintain_log" fetch="select">
+            <key>
+                <column name="UPDATER" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.UserMaintainLog" />
+        </set>
+    </class>
+</hibernate-mapping>

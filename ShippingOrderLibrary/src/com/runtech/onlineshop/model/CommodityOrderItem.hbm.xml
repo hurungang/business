@@ -8,6 +8,9 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
+        <many-to-one name="commodityOrder" class="com.runtech.onlineshop.model.CommodityOrder" lazy="false" fetch="select">
+            <column name="ORDER_ID" not-null="true" />
+        </many-to-one>
         <many-to-one name="commodity" class="com.runtech.onlineshop.model.Commodity" fetch="select" lazy="false">
             <column name="COMMODITY_ID" not-null="true" />
         </many-to-one>

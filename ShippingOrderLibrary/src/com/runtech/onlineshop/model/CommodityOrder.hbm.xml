@@ -14,6 +14,12 @@
         <many-to-one name="user" class="com.runtech.onlineshop.model.User" fetch="select" lazy="false">
             <column name="USER_ID" />
         </many-to-one>
+        <property name="externalId" type="string">
+            <column name="EXTERNAL_ID" length="255" />
+        </property>
+        <property name="agent" type="string">
+            <column name="AGENT" length="255" />
+        </property>
         <property name="dealTime" type="timestamp">
             <column name="DEAL_TIME" length="19" not-null="true" />
         </property>

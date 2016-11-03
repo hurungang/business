@@ -105,11 +105,14 @@ public class CommodityProviderForm extends CommodityProvider implements
 		}
 	}
 
-	public List<CommodityProviderForm> getAllCommodityProvider() throws ModelException
+	public List<CommodityProviderForm> getAllProviders(String type) throws ModelException
 	{
 		List<CommodityProviderForm> list = new ArrayList<CommodityProviderForm>();
 		ModelHome modelHome = new ModelHome();
 		CommodityProvider commodityProvider = new CommodityProvider(); 
+		if(type!=null){
+			commodityProvider.setType(type);
+		}
 		List<Object> tempList = modelHome.findByExample(commodityProvider);
 		for (Object object : tempList) {
 			CommodityProviderForm commodityProviderForm = new CommodityProviderForm(object);
@@ -117,7 +120,22 @@ public class CommodityProviderForm extends CommodityProvider implements
 		}
 		return list;
 	}
-
+	
+	public List<CommodityProviderForm> getAllCommodityProviders() throws ModelException
+	{
+		return getAllProviders(Constant.CODE_PROVIDER_TYPE_COMMODITY);
+	}
+	
+	public List<CommodityProviderForm> getAllDeliveryProviders() throws ModelException
+	{
+		return getAllProviders(Constant.CODE_PROVIDER_TYPE_DELIVERY);
+	}
+	
+	public List<CommodityProviderForm> getAllPartnerProviders() throws ModelException
+	{
+		return getAllProviders(Constant.CODE_PROVIDER_TYPE_PARTNER);
+	}
+	
 	public Integer[] getIds() {
 		// TODO Auto-generated method stub
 		return this.ids;
@@ -137,6 +155,7 @@ public class CommodityProviderForm extends CommodityProvider implements
 			}
 			commodityProvider.setStatus(Constant.STATUS_DRAFT);
 			try {
+				commodityProvider.setType(this.getType());
 				commodityProvider.setName(this.getName());
 				commodityProvider.setSupplyScope(this.getSupplyScope());
 				commodityProvider.setPhone(this.getPhone());
@@ -243,9 +262,6 @@ public class CommodityProviderForm extends CommodityProvider implements
 		}
 		if(this.getSupplyScope()!=null&&!this.getSupplyScope().trim().equals("")){
 			queryString += " and supplyScope like \"%"+this.getSupplyScope()+"%\"";
-		}
-		if(!context.getUser().getMenu().getActiveMenu().getAuthorization().isSupervisable()){
-			queryString += " and admin.id = "+context.getUser().getId();
 		}
 		queryString += " order by updateTime desc";
 		pager.setTotalSize(modelHome.getCount(queryString));

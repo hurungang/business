@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 24, 2013 2:11:06 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.UserMaintainLog" table="user_maintain_log" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="USER_ID" />
+        </many-to-one>
+        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="ADMIN_ID" />
+        </many-to-one>
+        <many-to-one name="updater" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="UPDATER" />
+        </many-to-one>
+        <property name="maintainTime" type="timestamp">
+            <column name="MAINTAIN_TIME" length="19" not-null="true" />
+        </property>
+        <property name="summary" type="string">
+            <column name="SUMMARY" length="1000" />
+        </property>
+        <property name="detail" type="string">
+            <column name="DETAIL" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="UPDATE_TIME" length="19" not-null="true" />
+        </property>
+        <property name="opportunity" type="string">
+            <column name="OPPORTUNITY" length="2000" />
+        </property>
+        <property name="opportunityValue" type="big_decimal">
+            <column name="OPPORTUNITY_VALUE" precision="8" />
+        </property>
+        <property name="opportunityPossibility" type="big_decimal">
+            <column name="OPPORTUNITY_POSSIBILITY" precision="2" />
+        </property>
+        <property name="opportunityTime" type="timestamp">
+            <column name="OPPORTUNITY_TIME" length="19" />
+        </property>
+        <property name="opportunityStatus" type="string">
+            <column name="OPPORTUNITY_STATUS" length="50" />
+        </property>
+        <property name="reviewer" type="java.lang.Integer">
+            <column name="REVIEWER" />
+        </property>
+        <property name="reviewComments" type="string">
+            <column name="REVIEW_COMMENTS" length="2000" />
+        </property>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

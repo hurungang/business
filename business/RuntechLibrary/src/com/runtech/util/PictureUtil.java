@@ -180,4 +180,6 @@ public class PictureUtil {
 		}
 		System.out.println("总共用了：" + count + "毫秒");
 	}
+	
+	
 }

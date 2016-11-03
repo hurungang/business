@@ -41,7 +41,7 @@ public class CommodityPictureForm extends CommodityPicture implements ModelForm 
 			try {
 				this.prepare(context);
 				if(this.picture!=null){
-					String filePath = context.saveFile(this.picture,this.pictureFileName,true);
+					String filePath = context.saveImage(this.picture,this.pictureFileName,true);
 					this.setPath(filePath);
 				}else{
 					action.addActionError("no picture selected");
@@ -166,7 +166,11 @@ public class CommodityPictureForm extends CommodityPicture implements ModelForm 
 	public void setPicture(File picture) {
 		this.picture = picture;
 	}
-	
+
+	public File getPicture() {
+		return picture;
+	}
+
 	public void setPictureFileName(String fileName){
 		this.pictureFileName = fileName;
 	}
@@ -176,6 +180,15 @@ public class CommodityPictureForm extends CommodityPicture implements ModelForm 
 		if(action.getActionType().equals(Constant.ACTION_DELETE)){
 			context.setResult(context.getAction().getResultCustom());
 			context.setNextLocation(this.nextLocation);
+		}
+	}
+	
+	public void savePicture(RuntechContext context) {
+		if(this.picture!=null){
+			String filePath = context.saveImage(this.picture,this.pictureFileName,true);
+			this.setPath(filePath);
+		}else{
+			return;
 		}
 	}
 	

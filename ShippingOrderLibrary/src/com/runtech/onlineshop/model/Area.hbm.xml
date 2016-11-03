@@ -8,7 +8,7 @@
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select">
+        <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select" lazy="false">
             <column name="PARENT_ID" />
         </many-to-one>
         <property name="code" type="string">

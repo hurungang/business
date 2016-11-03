@@ -1,5 +1,5 @@
 package com.runtech.onlineshop.model;
-// Generated 2016-5-4 9:52:57 by Hibernate Tools 3.4.0.CR1
+// Generated 2016-5-15 18:37:17 by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +17,7 @@ public class Commodity implements java.io.Serializable {
 	private CommodityCategory commodityCategory;
 	private Integer commodityBaseId;
 	private Integer parentCommodityId;
+	private String externalId;
 	private String name;
 	private String shortName;
 	private String summary;
@@ -39,20 +40,17 @@ public class Commodity implements java.io.Serializable {
 	public Commodity() {
 	}
 
-	public Commodity(String name, String shortName, Integer minimumBuy, String picturePath, String status,
-			BigDecimal price, Date updateTime) {
+	public Commodity(String name, String shortName, String status, BigDecimal price, Date updateTime) {
 		this.name = name;
 		this.shortName = shortName;
-		this.minimumBuy = minimumBuy;
-		this.picturePath = picturePath;
 		this.status = status;
 		this.price = price;
 		this.updateTime = updateTime;
 	}
 
 	public Commodity(CommodityProvider commodityProvider, Area area, CommodityCategory commodityCategory,
-			Integer commodityBaseId, Integer parentCommodityId, String name, String shortName, String summary,
-			String standard, Integer minimumBuy, String picturePath, Integer priority, String status,
+			Integer commodityBaseId, Integer parentCommodityId, String externalId, String name, String shortName,
+			String summary, String standard, Integer minimumBuy, String picturePath, Integer priority, String status,
 			BigDecimal originalPrice, BigDecimal price, Integer updater, Date updateTime, String remark,
 			String description, String specification, String instruction, Set<CommodityOrderItem> commodityOrderItems,
 			Set<CommodityPicture> commodityPictures) {
@@ -61,6 +59,7 @@ public class Commodity implements java.io.Serializable {
 		this.commodityCategory = commodityCategory;
 		this.commodityBaseId = commodityBaseId;
 		this.parentCommodityId = parentCommodityId;
+		this.externalId = externalId;
 		this.name = name;
 		this.shortName = shortName;
 		this.summary = summary;
@@ -127,6 +126,14 @@ public class Commodity implements java.io.Serializable {
 
 	public void setParentCommodityId(Integer parentCommodityId) {
 		this.parentCommodityId = parentCommodityId;
+	}
+
+	public String getExternalId() {
+		return this.externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
 	}
 
 	public String getName() {

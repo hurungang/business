@@ -1,5 +1,5 @@
 package com.runtech.onlineshop.model;
-// Generated 2016-5-4 9:52:57 by Hibernate Tools 3.4.0.CR1
+// Generated 2016-5-15 18:37:17 by Hibernate Tools 3.4.0.CR1
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,10 +14,12 @@ public class CommodityOrder implements java.io.Serializable {
 	private User user;
 	private Area area;
 	private Date dealTime;
+	private String externalId;
 	private String quickRequest;
 	private String quickPropose;
 	private BigDecimal freight;
 	private String deliveryAddress;
+	private String agent;
 	private String memo;
 	private Date deliveryTime;
 	private String deliveryCompany;
@@ -37,18 +39,20 @@ public class CommodityOrder implements java.io.Serializable {
 		this.dealTime = dealTime;
 	}
 
-	public CommodityOrder(Consignment consignment, User user, Area area, Date dealTime, String quickRequest,
-			String quickPropose, BigDecimal freight, String deliveryAddress, String memo, Date deliveryTime,
-			String deliveryCompany, String deliveryTrackId, String postcode, String contact, String contactPhone,
-			Date updateTime, String status, String comment, String remark) {
+	public CommodityOrder(Consignment consignment, User user, Area area, Date dealTime, String externalId,
+			String quickRequest, String quickPropose, BigDecimal freight, String deliveryAddress, String agent,
+			String memo, Date deliveryTime, String deliveryCompany, String deliveryTrackId, String postcode,
+			String contact, String contactPhone, Date updateTime, String status, String comment, String remark) {
 		this.consignment = consignment;
 		this.user = user;
 		this.area = area;
 		this.dealTime = dealTime;
+		this.externalId = externalId;
 		this.quickRequest = quickRequest;
 		this.quickPropose = quickPropose;
 		this.freight = freight;
 		this.deliveryAddress = deliveryAddress;
+		this.agent = agent;
 		this.memo = memo;
 		this.deliveryTime = deliveryTime;
 		this.deliveryCompany = deliveryCompany;
@@ -102,6 +106,14 @@ public class CommodityOrder implements java.io.Serializable {
 		this.dealTime = dealTime;
 	}
 
+	public String getExternalId() {
+		return this.externalId;
+	}
+
+	public void setExternalId(String externalId) {
+		this.externalId = externalId;
+	}
+
 	public String getQuickRequest() {
 		return this.quickRequest;
 	}
@@ -132,6 +144,14 @@ public class CommodityOrder implements java.io.Serializable {
 
 	public void setDeliveryAddress(String deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+
+	public String getAgent() {
+		return this.agent;
+	}
+
+	public void setAgent(String agent) {
+		this.agent = agent;
 	}
 
 	public String getMemo() {

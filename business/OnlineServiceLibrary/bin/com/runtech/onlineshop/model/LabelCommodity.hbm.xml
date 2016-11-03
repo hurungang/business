@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.LabelCommodity" table="label_commodity">
+        <composite-id name="id" class="com.runtech.onlineshop.model.LabelCommodityId">
+            <key-property name="labelName" type="string">
+                <column name="LABEL_NAME" length="50" />
+            </key-property>
+            <key-property name="commodityId" type="java.lang.Integer">
+                <column name="COMMODITY_ID" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="labelWord" class="com.runtech.onlineshop.model.LabelWord" update="false" insert="false" fetch="select">
+            <column name="LABEL_NAME" length="50" not-null="true" />
+        </many-to-one>
+        <many-to-one name="commodity" class="com.runtech.onlineshop.model.Commodity" update="false" insert="false" fetch="select">
+            <column name="COMMODITY_ID" not-null="true" />
+        </many-to-one>
+        <property name="status" type="string">
+            <column name="STATUS" length="50" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

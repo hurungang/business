@@ -1,5 +1,5 @@
 package com.runtech.onlineshop.model;
-// Generated 2016-5-3 10:52:10 by Hibernate Tools 3.4.0.CR1
+// Generated 2016-5-5 11:54:37 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -11,17 +11,17 @@ import java.util.Set;
 public class Consignment implements java.io.Serializable {
 
 	private Integer id;
-	private String consignmentTitle;
-	private String consignmentDescription;
-	private String consignmentOperator;
-	private String consignmentPosition;
-	private String consignmentCompany;
-	private String consignmentCompanyAcn;
-	private String consignmentCompanyTaxNo;
+	private CommodityProvider deliveryCompany;
+	private CommodityProvider company;
+	private String title;
+	private String description;
+	private String operator;
+	private String position;
 	private Date createTime;
 	private Date deliveryTime;
 	private String status;
 	private String comment;
+	private Set<CommodityOrder> commodityOrders = new HashSet<CommodityOrder>(0);
 	private Set<ConsignmentPicture> consignmentPictures = new HashSet<ConsignmentPicture>(0);
 
 	public Consignment() {
@@ -31,17 +31,16 @@ public class Consignment implements java.io.Serializable {
 		this.createTime = createTime;
 	}
 
-	public Consignment(String consignmentTitle, String consignmentDescription, String consignmentOperator,
-			String consignmentPosition, String consignmentCompany, String consignmentCompanyAcn,
-			String consignmentCompanyTaxNo, Date createTime, Date deliveryTime, String status, String comment,
-			Set<ConsignmentPicture> consignmentPictures) {
-		this.consignmentTitle = consignmentTitle;
-		this.consignmentDescription = consignmentDescription;
-		this.consignmentOperator = consignmentOperator;
-		this.consignmentPosition = consignmentPosition;
-		this.consignmentCompany = consignmentCompany;
-		this.consignmentCompanyAcn = consignmentCompanyAcn;
-		this.consignmentCompanyTaxNo = consignmentCompanyTaxNo;
+	public Consignment(CommodityProvider commodityProviderByDeliveryCompany,
+			CommodityProvider commodityProviderByCompany, String title, String description, String operator,
+			String position, Date createTime, Date deliveryTime, String status, String comment,
+			Set<CommodityOrder> commodityOrders,Set<ConsignmentPicture> consignmentPictures) {
+		this.deliveryCompany = commodityProviderByDeliveryCompany;
+		this.company = commodityProviderByCompany;
+		this.title = title;
+		this.description = description;
+		this.operator = operator;
+		this.position = position;
 		this.createTime = createTime;
 		this.deliveryTime = deliveryTime;
 		this.status = status;
@@ -57,60 +56,53 @@ public class Consignment implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public String getConsignmentTitle() {
-		return this.consignmentTitle;
+
+	public CommodityProvider getDeliveryCompany() {
+		return deliveryCompany;
 	}
 
-	public void setConsignmentTitle(String consignmentTitle) {
-		this.consignmentTitle = consignmentTitle;
+	public void setDeliveryCompany(CommodityProvider deliveryCompany) {
+		this.deliveryCompany = deliveryCompany;
 	}
 
-	public String getConsignmentDescription() {
-		return this.consignmentDescription;
+	public CommodityProvider getCompany() {
+		return company;
 	}
 
-	public void setConsignmentDescription(String consignmentDescription) {
-		this.consignmentDescription = consignmentDescription;
+	public void setCompany(CommodityProvider company) {
+		this.company = company;
 	}
 
-	public String getConsignmentOperator() {
-		return this.consignmentOperator;
+	public String getTitle() {
+		return this.title;
 	}
 
-	public void setConsignmentOperator(String consignmentOperator) {
-		this.consignmentOperator = consignmentOperator;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getConsignmentPosition() {
-		return this.consignmentPosition;
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setConsignmentPosition(String consignmentPosition) {
-		this.consignmentPosition = consignmentPosition;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getConsignmentCompany() {
-		return this.consignmentCompany;
+	public String getOperator() {
+		return this.operator;
 	}
 
-	public void setConsignmentCompany(String consignmentCompany) {
-		this.consignmentCompany = consignmentCompany;
+	public void setOperator(String operator) {
+		this.operator = operator;
 	}
 
-	public String getConsignmentCompanyAcn() {
-		return this.consignmentCompanyAcn;
+	public String getPosition() {
+		return this.position;
 	}
 
-	public void setConsignmentCompanyAcn(String consignmentCompanyAcn) {
-		this.consignmentCompanyAcn = consignmentCompanyAcn;
-	}
-
-	public String getConsignmentCompanyTaxNo() {
-		return this.consignmentCompanyTaxNo;
-	}
-
-	public void setConsignmentCompanyTaxNo(String consignmentCompanyTaxNo) {
-		this.consignmentCompanyTaxNo = consignmentCompanyTaxNo;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	public Date getCreateTime() {
@@ -152,6 +144,14 @@ public class Consignment implements java.io.Serializable {
 
 	public void setConsignmentPictures(Set<ConsignmentPicture> consignmentPictures) {
 		this.consignmentPictures = consignmentPictures;
+	}
+
+	public Set<CommodityOrder> getCommodityOrders() {
+		return commodityOrders;
+	}
+
+	public void setCommodityOrders(Set<CommodityOrder> commodityOrders) {
+		this.commodityOrders = commodityOrders;
 	}
 
 }

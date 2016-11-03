@@ -63,10 +63,15 @@
 	<classpathentry exported="true" kind="lib" path="lib/Qrcodeen.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/gson-2.3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/struts2-json-plugin-2.1.8.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/struts2-core-2.1.8.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/struts2-core-2.1.8.jar" sourcepath="C:/My Documents/My Business/Workspace/Source/struts2-core-2.1.8-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xwork-core-2.1.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/activation.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/displaytag-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-beanutils-1.9.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-3.14-20160307.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-3.14-20160307.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-schemas-3.14-20160307.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jsoup-1.9.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 18, 2010 5:12:25 PM by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.PointLog" table="point_log">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="user" class="com.runtech.onlineshop.model.User" fetch="select">
+            <column name="USER_ID" />
+        </many-to-one>
+        <many-to-one name="commodityOrder" class="com.runtech.onlineshop.model.CommodityOrder" fetch="select">
+            <column name="ORDER_ID" />
+        </many-to-one>
+        <property name="typeCode" type="string">
+            <column name="TYPE_CODE" length="50" />
+        </property>
+        <property name="point" type="big_decimal">
+            <column name="POINT" precision="10" />
+        </property>
+        <property name="pointTime" type="timestamp">
+            <column name="POINT_TIME" length="19" not-null="true" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

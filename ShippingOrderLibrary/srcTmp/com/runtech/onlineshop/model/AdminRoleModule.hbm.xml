@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-5-4 9:52:58 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016-5-15 18:37:18 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.runtech.onlineshop.model.AdminRoleModule" table="admin_role_module" catalog="bg_sos_db">
         <composite-id name="id" class="com.runtech.onlineshop.model.AdminRoleModuleId">

@@ -5,16 +5,17 @@ package com.runtech.web.action;
  * 使用Struts2上传文件 
  */
 import java.io.File;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
+import com.runtech.web.util.Constant;
 
 public class UploadAction extends StrutsAction {
 
@@ -23,13 +24,15 @@ public class UploadAction extends StrutsAction {
 			     */
 	private static final long serialVersionUID = -1896915260152387341L;
 	
-    private List<File> fileObj;  
-    private List<String> fileObjContentType;  
-    private List<String> fileObjFileName;  
+    private List<File> upload;  
+    private List<String> uploadContentType;  
+    private List<String> uploadFileName;  
     
 	private String fullPath;
 
 	private String error;
+
+	private String actionType;
 
 
 	public UploadAction() {
@@ -37,56 +40,70 @@ public class UploadAction extends StrutsAction {
 
 	
 
-	public List<File> getFileObj() {
-		return fileObj;
+	public List<File> getUpload() {
+		return upload;
 	}
 
 
 
-	public void setFileObj(List<File> fileObj) {
-		this.fileObj = fileObj;
+	public void setUpload(List<File> upload) {
+		this.upload = upload;
 	}
 
 
 
-	public List<String> getFileObjContentType() {
-		return fileObjContentType;
+	public List<String> getUploadContentType() {
+		return uploadContentType;
 	}
 
 
 
-	public void setFileObjContentType(List<String> fileObjContentType) {
-		this.fileObjContentType = fileObjContentType;
+	public void setUploadContentType(List<String> uploadContentType) {
+		this.uploadContentType = uploadContentType;
 	}
 
 
 
-	public List<String> getFileObjFileName() {
-		return fileObjFileName;
+	public List<String> getUploadFileName() {
+		return uploadFileName;
 	}
 
 
 
-	public void setFileObjFileName(List<String> fileObjFileName) {
-		this.fileObjFileName = fileObjFileName;
+	public void setUploadFileName(List<String> uploadFileName) {
+		this.uploadFileName = uploadFileName;
 	}
 
 
 
 	@Override
 	public String execute() throws Exception {
-		for (int i=0;i<this.fileObj.size();i++){
+		fullPath = "[";
+		for (int i=0;i<this.upload.size();i++){
 			ServletContext servletContext=ServletActionContext.getServletContext();
 			try {
 				String realPath = servletContext.getContext(getUploadContext()).getRealPath(getUploadFilePath());
-				File newFile = new File(realPath+"/"+fileObjFileName.get(i));
-				FileUtils.copyFile(fileObj.get(i), newFile);
-				fullPath = getUploadFilePath()+"/"+newFile.getName();
+			
+				long currentTimeMillis = System.currentTimeMillis();
+				String tempFileName = uploadFileName.get(i);
+				String surfix = tempFileName.substring(tempFileName.lastIndexOf(".")+1);
+				
+				File newFile = new File(realPath+"/"+currentTimeMillis+"."+surfix);
+				FileUtils.copyFile(upload.get(i), newFile);
+				if(!fullPath.equals("[")){
+					fullPath +=",";
+				}
+				fullPath += "\""+getUploadContext()+getUploadFilePath()+"/"+newFile.getName()+"\"";
 			} catch (Exception e) {
 				this.error = e.getMessage();
 			}
 		}
-		return SUCCESS;
+		fullPath += "]";
+		if(Constant.ACTION_CKEDITOR_UPLOAD.equals(actionType)){
+			return Constant.RESULT_CKEDITOR_SUCCESS;
+		}else{
+			return SUCCESS;
+		}
 	}
 
 
@@ -98,4 +115,7 @@ public class UploadAction extends StrutsAction {
 		return error;
 	}
 
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
+	}
 }

@@ -28,8 +28,10 @@
 					<div ng-show="accordionCtrl.isVisiable()">
 						<div>
 							<ul class="list-group">
-								<li class="list-group-item no-bottom-line">发货批次:<span class="badge-info">{{order.consignment.consignmentTitle}}</span></li>
+								<li class="list-group-item no-bottom-line">发货批次:<span class="badge-info">{{order.consignment.title}}</span></li>
 								<li class="list-group-item no-bottom-line">发货时间:<span class="badge-info">{{order.consignment.deliveryTime}}</span></li>
+								<li class="list-group-item no-bottom-line">供应商:<span class="badge-info">{{order.consignment.company.name}}</span></li>
+								<li class="list-group-item no-bottom-line">承运公司:<span class="badge-info">{{order.consignment.deliveryCompany.name}}</span></li>
 							</ul>
 						</div>
 					</div>

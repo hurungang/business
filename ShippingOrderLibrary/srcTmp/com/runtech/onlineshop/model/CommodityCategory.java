@@ -1,5 +1,5 @@
 package com.runtech.onlineshop.model;
-// Generated 2016-5-4 9:52:57 by Hibernate Tools 3.4.0.CR1
+// Generated 2016-5-15 18:37:17 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -21,6 +21,7 @@ public class CommodityCategory implements java.io.Serializable {
 	private String remark;
 	private Set<Commodity> commodities = new HashSet<Commodity>(0);
 	private Set<CommodityCategory> commodityCategories = new HashSet<CommodityCategory>(0);
+	private Set<Content> contents = new HashSet<Content>(0);
 
 	public CommodityCategory() {
 	}
@@ -33,7 +34,7 @@ public class CommodityCategory implements java.io.Serializable {
 
 	public CommodityCategory(CommodityCategory commodityCategory, String name, String description, String status,
 			Integer updater, Date updateTime, Integer priority, String remark, Set<Commodity> commodities,
-			Set<CommodityCategory> commodityCategories) {
+			Set<CommodityCategory> commodityCategories, Set<Content> contents) {
 		this.commodityCategory = commodityCategory;
 		this.name = name;
 		this.description = description;
@@ -44,6 +45,7 @@ public class CommodityCategory implements java.io.Serializable {
 		this.remark = remark;
 		this.commodities = commodities;
 		this.commodityCategories = commodityCategories;
+		this.contents = contents;
 	}
 
 	public Integer getId() {
@@ -132,6 +134,14 @@ public class CommodityCategory implements java.io.Serializable {
 
 	public void setCommodityCategories(Set<CommodityCategory> commodityCategories) {
 		this.commodityCategories = commodityCategories;
+	}
+
+	public Set<Content> getContents() {
+		return this.contents;
+	}
+
+	public void setContents(Set<Content> contents) {
+		this.contents = contents;
 	}
 
 }

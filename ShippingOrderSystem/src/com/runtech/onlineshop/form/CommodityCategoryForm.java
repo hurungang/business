@@ -129,7 +129,7 @@ public class CommodityCategoryForm extends CommodityCategory implements
 			ModelHome modelHome = new ModelHome();
 			CommodityCategoryForm queryForm = new CommodityCategoryForm();
 			queryForm.setParentId(rootCategory.getId());
-			List<Object> subCommodityCategories = modelHome.findByExample(queryForm);
+			List<Object> subCommodityCategories = modelHome.findByExample(queryForm.getModel());
 			
 			for (Object element : subCommodityCategories) {
 				CommodityCategory ca = (CommodityCategory) element;

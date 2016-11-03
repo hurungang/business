@@ -28,12 +28,14 @@
         <mapping resource="com/runtech/onlineshop/model/Area.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/Commodity.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/Admin.hbm.xml" />
+        <mapping resource="com/runtech/onlineshop/model/SystemCode.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/AdminRoleModule.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/ConsignmentPicture.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/CommodityPicture.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/AdminModule.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/AdminLoginLog.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/CommodityOrderItem.hbm.xml" />
+        <mapping resource="com/runtech/onlineshop/model/Content.hbm.xml" />
         <mapping resource="com/runtech/onlineshop/model/CommodityCategory.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

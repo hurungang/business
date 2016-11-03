@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-4-30 21:40:10 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016-5-5 11:32:03 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.runtech.onlineshop.model.CommodityProvider" table="commodity_provider" catalog="bg_sos_db">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
         </id>
-        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" fetch="select" lazy="false">
+        <many-to-one name="admin" class="com.runtech.onlineshop.model.Admin" lazy="false" fetch="select">
             <column name="UPDATER" />
         </many-to-one>
         <property name="name" type="string">
             <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" length="100" not-null="true" />
         </property>
         <property name="supplyScope" type="string">
             <column name="SUPPLY_SCOPE" length="500" />
@@ -43,6 +46,15 @@
         </property>
         <property name="description" type="string">
             <column name="DESCRIPTION" length="65535" />
+        </property>
+        <property name="registerNo" type="string">
+            <column name="REGISTER_NO" length="200" />
+        </property>
+        <property name="taxNo" type="string">
+            <column name="TAX_NO" length="200" />
+        </property>
+        <property name="organizationNo" type="string">
+            <column name="ORGANIZATION_NO" length="200" />
         </property>
         <property name="contractContent" type="string">
             <column name="CONTRACT_CONTENT" length="65535" />

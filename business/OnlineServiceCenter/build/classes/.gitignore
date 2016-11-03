@@ -6,11 +6,3 @@
 /hibernate.cfg.xml
 /log4j.properties
 /net/
-/quartz.properties
-/quartz_job.xml
-/runtech-links.properties
-/runtech-struts.xml
-/runtech.properties
-/struts.properties
-/struts.xml
-/template/

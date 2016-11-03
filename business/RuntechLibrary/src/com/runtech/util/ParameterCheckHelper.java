@@ -150,7 +150,7 @@ public static boolean isDangerousValue(String value) {
 	public static boolean isDangerousURL(String requestURL){
         // Avoid url= [<>,;'"]
 		if(requestURL!=null&&requestURL.length()>0){
-	      Pattern scriptPattern = Pattern.compile("[<>(),;'\"]");
+	      Pattern scriptPattern = Pattern.compile("[<>(),'\"]");
 	      Matcher matcher = scriptPattern.matcher(requestURL);
 	      if (matcher.find()) {
 	          return true;

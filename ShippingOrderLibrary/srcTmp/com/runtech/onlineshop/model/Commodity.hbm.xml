@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-5-4 9:52:58 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016-5-15 18:37:18 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.runtech.onlineshop.model.Commodity" table="commodity" catalog="bg_sos_db">
         <id name="id" type="java.lang.Integer">
@@ -23,6 +23,9 @@
         <property name="parentCommodityId" type="java.lang.Integer">
             <column name="PARENT_COMMODITY_ID" />
         </property>
+        <property name="externalId" type="string">
+            <column name="EXTERNAL_ID" />
+        </property>
         <property name="name" type="string">
             <column name="NAME" length="100" not-null="true" />
         </property>
@@ -36,10 +39,10 @@
             <column name="STANDARD" length="100" />
         </property>
         <property name="minimumBuy" type="java.lang.Integer">
-            <column name="MINIMUM_BUY" not-null="true" />
+            <column name="MINIMUM_BUY" />
         </property>
         <property name="picturePath" type="string">
-            <column name="PICTURE_PATH" length="256" not-null="true" />
+            <column name="PICTURE_PATH" length="256" />
         </property>
         <property name="priority" type="java.lang.Integer">
             <column name="PRIORITY" />

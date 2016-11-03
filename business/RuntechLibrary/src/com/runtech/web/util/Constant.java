@@ -105,6 +105,7 @@ public class Constant {
 	public static final String CODE_RECOMMEND_TYPE = "recommendType";
 	public static final String CODE_AREA_CATEGORY = "areaCategory";
 	public static final String CODE_CONTRACT_TYPE = "contractType";
+	public static final String CODE_PROVIDER_TYPE = "providerType";
 	public static final String CODE_COUPON_STATUS = "couponStatus";
 	public static final String CODE_SEX = "sex";
 	public static final String CODE_CREDENTIAL_TYPE = "credentialType";
@@ -124,6 +125,7 @@ public class Constant {
 	public static final String CODE_EXPRESS = "EXPRESS";
 	public static final String CODE_VIRTUAL = "VIRTUAL";
 	public static final String CODE_COMMODITY_CATEGORY_ROOT = "tuanCategory";
+	public static final String CODE_OVERSEA_COMMODITY_CATEGORY_ROOT = "oversea";
 	public static final String CODE_CONTENT_CATEGORY_ROOT = "content";
 	public static final String CODE_HELP_CATEGORY_ROOT = "help";
 	public static final String CODE_RECOMMEND_MAIL_TEMPLATE = "recommendMailTemplate";
@@ -194,4 +196,16 @@ public class Constant {
 	public static final String CODE_BUSINESS_AREA = "businessArea";
 	public static final String CODE_DEFAULT_COMMODITY_DETAIL = "defaultCommodityDetail";
 	public static final String ACTION_AGENT_ORDER = "agentOrder";
+	public static final String CODE_PROVIDER_TYPE_COMMODITY = "commodity";
+	public static final String CODE_PROVIDER_TYPE_DELIVERY = "delivery";
+	public static final String CODE_PROVIDER_TYPE_PARTNER = "partner";
+	public static final String RESULT_AJAX = "ajax";
+	public static final String AJAX_ERROR_MESSAGE = "errorMessage";
+	public static final String AJAX_SUCCESS = "success";
+	public static final Object ACTION_SAVE_PICTURE = "savePicture";
+	public static final Object ACTION_DELETE_PICTURE = "deletePicture";
+	public static final Object ACTION_QRCODE = "showQRCode";
+	public static final String RESULT_STREAM = "stream";
+	public static final Object ACTION_CKEDITOR_UPLOAD = "ckeditorUpload";
+	public static final String RESULT_CKEDITOR_SUCCESS = "ckeditorSuccess";
 }

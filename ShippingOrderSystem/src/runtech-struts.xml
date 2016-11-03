@@ -15,9 +15,9 @@
 	<constant name="runtech.result.unauthorized" value="unauthorized"/>
 	<constant name="runtech.result.custom" value="custom"/>
 	<constant name="runtech.page.size" value="10"/>
-	<constant name="runtech.context.upload" value="/upload"/>
-	<constant name="runtech.path.uploadImage" value="/images"/>
-	<constant name="runtech.path.uploadFile" value="/files"/>
+	<constant name="runtech.context.upload" value="/service"/>
+	<constant name="runtech.path.uploadImage" value="/upload/images"/>
+	<constant name="runtech.path.uploadFile" value="/upload/files"/>
 	<bean class="com.runtech.sms.SMSSenderImpl" name="runtech.sms.sender" type="com.runtech.util.SMSSender"></bean>
 	
 	<package extends="runtech-defaults" name="root" namespace="/">
@@ -67,12 +67,15 @@
 		<action  name="upload" class="com.runtech.web.action.UploadAction">
                 <interceptor-ref name="servletConfig"/>
 				<interceptor-ref name="fileUpload">   
-					<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/bmp,image/gif,image/x-png,application/msword,application/excel,application/vnd.ms-excel,application/pdf,application/octet-stream,text/plain</param>
-					<param name="maximumSize">1024000</param>   
+					<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/bmp,image/gif,image/x-png,application/msword,application/excel,application/vnd.ms-excel,application/pdf,application/octet-stream,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
+					<param name="maximumSize">50000000</param>   
 	            </interceptor-ref>  
 	            <interceptor-ref name="runtechBasicStack"/> 
 			<result type="dispatcher" name="success">
 				<param name="location">/protect/upload.jsp</param>
+			</result>
+			<result type="dispatcher" name="ckeditorSuccess">
+				<param name="location">/protect/ckeditorUpload.jsp</param>
 			</result>
 		</action>
 		
@@ -98,7 +101,7 @@
                 <interceptor-ref name="servletConfig"/>
 				<interceptor-ref name="authenticationInterceptor"/> 
 				<interceptor-ref name="fileUpload">   
-					<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/bmp,image/gif,image/x-png,application/msword,application/excel,application/vnd.ms-excel,application/pdf,application/octet-stream,text/plain</param>
+					<param name="allowedTypes"> image/bmp,image/png,image/gif,image/jpeg,image/jpg,image/pjpeg,image/bmp,image/gif,image/x-png,application/msword,application/excel,application/vnd.ms-excel,application/pdf,application/octet-stream,text/plain,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
 					<param name="maximumSize">1024000</param>   
 	            </interceptor-ref>  
 	            <interceptor-ref name="runtechBasicStack"/> 
@@ -132,6 +135,7 @@
 		    </interceptor-ref>
 		    <interceptor-ref name="basicAuthenticationStack"></interceptor-ref>
 			<param name="pageCode">{1}</param>
+			<param name="ajax">true</param>
 			<result type="redirectAction" name="success">
 				<param name="actionName">ajax/${pageCode}</param>
 				<param name="namespace">/protect</param>
@@ -146,6 +150,9 @@
 			<result type="dispatcher" name="failure">
 				<param name="location">/protect/ajax.jsp?$body=${pagePath}</param>
 			</result>
+			<result type="dispatcher" name="ajax">
+				<param name="location">/WEB-INF/jsp/default/ajaxResponse.jsp</param>
+			</result>
 			<result type="redirectAction" name="cancel">
 				<param name="actionName">ajax/${pageCode}</param>
 				<param name="namespace">/protect</param>
@@ -155,6 +162,11 @@
 				<param name="location">/protect/ajax.jsp?$body=/WEB-INF/jsp/default/unauthorized.jsp</param>
 			</result>
 			<result type="redirect" name="custom">${nextLocation}</result>
+	         <result name="stream" type="stream">
+	             <param name="contentType">image/png</param>
+	             <param name="inputName">inputStream</param>
+	             <param name="bufferSize">2048</param>
+	         </result>
 		</action>
 		<!-- page for edit -->
 		<action name="*/*" class="com.runtech.web.action.PageAction">

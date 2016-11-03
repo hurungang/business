@@ -91,9 +91,12 @@ $(document).ready(function(){
 		// Initialise jQuery WYSIWYG:
 		
 		$(".wysiwyg").wysiwyg(); // Applies WYSIWYG editor to any textarea with the class "wysiwyg"
-
+		$(".wysiwyg").wysiwyg('insertImage').click(function(e)
+		{
+			  e.preventDefault();
+			  alert('You have clicked insert Image!');
+		});;
 	    $(".datepicker").datepicker();
-
 	    CKEDITOR.on('instanceReady', function(ev)
 	    	    {
 	    	        var tags = ['p', 'ol', 'ul', 'li', 'div']; // etc.

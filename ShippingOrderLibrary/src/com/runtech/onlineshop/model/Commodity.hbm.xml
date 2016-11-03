@@ -17,6 +17,9 @@
         <many-to-one name="area" class="com.runtech.onlineshop.model.Area" fetch="select" lazy="false">
             <column name="AREA_ID" />
         </many-to-one>
+        <property name="externalId" type="string">
+            <column name="EXTERNAL_ID" length="255" />
+        </property>
         <property name="commodityBaseId" type="java.lang.Integer">
             <column name="COMMODITY_BASE_ID" />
         </property>
@@ -36,10 +39,10 @@
             <column name="STANDARD" length="100" />
         </property>
         <property name="minimumBuy" type="java.lang.Integer">
-            <column name="MINIMUM_BUY" not-null="true" />
+            <column name="MINIMUM_BUY"/>
         </property>
         <property name="picturePath" type="string">
-            <column name="PICTURE_PATH" length="256" not-null="true" />
+            <column name="PICTURE_PATH" length="256"/>
         </property>
         <property name="priority" type="java.lang.Integer">
             <column name="PRIORITY" />

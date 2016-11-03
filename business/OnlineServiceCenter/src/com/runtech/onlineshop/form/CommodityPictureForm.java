@@ -44,7 +44,7 @@ public class CommodityPictureForm extends CommodityPicture implements ModelForm 
 			try {
 				this.prepare(context);
 				if(this.picture!=null){
-					String filePath = context.saveFile(this.picture,this.pictureFileName,true);
+					String filePath = context.saveImage(this.picture,this.pictureFileName,true);
 					this.setPath(filePath);
 				}else{
 					action.addActionError("no picture selected");

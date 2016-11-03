@@ -115,7 +115,7 @@ public class CommodityForm extends Commodity implements ModelForm {
 					e.printStackTrace();
 					return false;
 				}
-				String filePath = context.saveFile(this.picture,fileName,true);
+				String filePath = context.saveImage(this.picture,fileName,true);
 				this.setPicturePath(filePath);
 			}
 		}else{

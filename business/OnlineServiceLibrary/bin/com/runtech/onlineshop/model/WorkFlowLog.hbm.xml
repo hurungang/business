@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 22, 2013 5:21:12 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.runtech.onlineshop.model.WorkFlowLog" table="work_flow_log" catalog="bg_osc_db">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="adminBySubmitter" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="SUBMITTER" />
+        </many-to-one>
+        <many-to-one name="workFlow" class="com.runtech.onlineshop.model.WorkFlow" fetch="select">
+            <column name="WORK_FLOW_ID" />
+        </many-to-one>
+        <many-to-one name="adminByReviewer" class="com.runtech.onlineshop.model.Admin" fetch="select">
+            <column name="REVIEWER" not-null="true" />
+        </many-to-one>
+        <property name="documentType" type="string">
+            <column name="DOCUMENT_TYPE" length="100" not-null="true" />
+        </property>
+        <property name="documentId" type="java.lang.Integer">
+            <column name="DOCUMENT_ID" not-null="true" />
+        </property>
+        <property name="reviewTime" type="timestamp">
+            <column name="REVIEW_TIME" length="19" not-null="true" />
+        </property>
+        <property name="previousStatus" type="string">
+            <column name="PREVIOUS_STATUS" length="50" not-null="true" />
+        </property>
+        <property name="afterStatus" type="string">
+            <column name="AFTER_STATUS" length="50" not-null="true" />
+        </property>
+        <property name="comments" type="string">
+            <column name="COMMENTS" length="65535" />
+        </property>
+        <property name="remark" type="string">
+            <column name="REMARK" length="256" />
+        </property>
+    </class>
+</hibernate-mapping>

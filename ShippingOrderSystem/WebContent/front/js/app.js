@@ -1,5 +1,7 @@
 var ORDER_OBJECT_TYPE = "com.runtech.onlineshop.json.CommodityOrderJson";
 var COMMODITY_OBJECT_TYPE = "com.runtech.onlineshop.json.CommodityJson";
+var CONTENT_OBJECT_TYPE = "com.runtech.onlineshop.json.ContentJson";
+var ACTION_LIST = "list";
 var orderId;
 
 var app = angular.module('app',['ngRoute','ngSanitize','ui.bootstrap','mobile-angular-ui','mobile-angular-ui.gestures','runtech-data-object']);
@@ -16,12 +18,18 @@ app.factory('Data', function(){
 });
 
 app.config(function($routeProvider) {
-	  $routeProvider.when('/order/:orderId',              {templateUrl: 'order/order.html', 
+	  $routeProvider.when('/order/:orderId',            {templateUrl: 'order/order.html', 
 	          controller  : 'OrderCtrl',
 	          reloadOnSearch: false})
           .when('/commodity/:commodityId',              {templateUrl: 'commodity/commodity.html', 
 	          controller  : 'CommodityCtrl',
 	          reloadOnSearch: false})
+	      .when('/content/:contentId',              {templateUrl: 'content/content.html', 
+		          controller  : 'ContentCtrl',
+		          reloadOnSearch: false})
+	      .when('/commodity',              				{templateUrl: 'commodity/commodityList.html', 
+		          controller  : 'CommodityListCtrl',
+		          reloadOnSearch: false})
           .otherwise({redirectTo: '/order'});
 	});
 
@@ -53,6 +61,26 @@ app.controller('CommodityCtrl', ['$scope','$http','$routeParams','RuntechDataObj
 	RuntechDataObject.get(COMMODITY_OBJECT_TYPE,$routeParams.commodityId)
 		.then(function(response) {
 		    $scope.commodity = response.data.result;
+			$scope.queryFailed = !response.data.success;
+		});
+}]);
+
+app.controller('CommodityListCtrl', ['$scope','$http','$routeParams','RuntechDataObject',
+                                 function($scope,$http,$routeParams,RuntechDataObject){
+	$scope.queryFailed = false;
+	RuntechDataObject.get(COMMODITY_OBJECT_TYPE,ACTION_LIST)
+		.then(function(response) {
+		    $scope.commodityList = response.data.result;
+			$scope.queryFailed = !response.data.success;
+		});
+}]);
+
+app.controller('ContentCtrl', ['$scope','$http','$routeParams','RuntechDataObject',
+                                 function($scope,$http,$routeParams,RuntechDataObject){
+	$scope.queryFailed = false;
+	RuntechDataObject.get(CONTENT_OBJECT_TYPE,$routeParams.contentId)
+		.then(function(response) {
+		    $scope.content = response.data.result;
 			$scope.queryFailed = !response.data.success;
 		});
 }]);

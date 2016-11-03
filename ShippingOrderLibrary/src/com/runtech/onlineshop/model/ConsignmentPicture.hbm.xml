@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-5-3 10:52:10 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016-5-5 11:54:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.runtech.onlineshop.model.ConsignmentPicture" table="consignment_picture" catalog="bg_sos_db">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
         </id>
+        <many-to-one name="consignment" class="com.runtech.onlineshop.model.Consignment" fetch="select">
+            <column name="CONSIGNMENT_ID" not-null="true" />
+        </many-to-one>
         <property name="picturePath" type="string">
             <column name="PICTURE_PATH" length="1000" />
         </property>

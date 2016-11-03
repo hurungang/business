@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-5-4 9:52:58 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016-5-15 18:37:18 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="com.runtech.onlineshop.model.CommodityProvider" table="commodity_provider" catalog="bg_sos_db">
         <id name="id" type="java.lang.Integer">
@@ -13,6 +13,9 @@
         </many-to-one>
         <property name="name" type="string">
             <column name="NAME" length="100" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="TYPE" length="50" />
         </property>
         <property name="supplyScope" type="string">
             <column name="SUPPLY_SCOPE" length="500" />
@@ -44,6 +47,15 @@
         <property name="description" type="string">
             <column name="DESCRIPTION" length="65535" />
         </property>
+        <property name="registerNo" type="string">
+            <column name="REGISTER_NO" length="200" />
+        </property>
+        <property name="taxNo" type="string">
+            <column name="TAX_NO" length="200" />
+        </property>
+        <property name="organizationNo" type="string">
+            <column name="ORGANIZATION_NO" length="200" />
+        </property>
         <property name="contractContent" type="string">
             <column name="CONTRACT_CONTENT" length="65535" />
         </property>
@@ -62,6 +74,18 @@
         <property name="remark" type="string">
             <column name="REMARK" length="256" />
         </property>
+        <set name="consignmentsForDeliveryCompany" table="consignment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="DELIVERY_COMPANY" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Consignment" />
+        </set>
+        <set name="consignmentsForCompany" table="consignment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="COMPANY" />
+            </key>
+            <one-to-many class="com.runtech.onlineshop.model.Consignment" />
+        </set>
         <set name="commodities" table="commodity" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="PROVIDER_ID" />

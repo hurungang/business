@@ -102,7 +102,7 @@ public class UserForm extends User implements ModelForm, FlowableForm {
 			this.setArea((Area)modelHome.findById(new Area(), this.areaId));
 		}
 		if(this.picture!=null){
-			String filePath = context.saveFile(this.picture,this.pictureFileName,false);
+			String filePath = context.saveImage(this.picture,this.pictureFileName,false);
 			this.setPicturePath(filePath);
 		}else{
 			this.setPicturePath(picPath);
